@@ -1,16 +1,23 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 )
 
+const (
+	port = ":3000"
+)
+
 func main() {
-	fmt.Println("Hello GO")
+	mux := http.NewServeMux()
+	mux.HandleFunc("/home", index)
 
-	http.ListenAndServe(":3000", http.HandlerFunc(handleRequest))
-}
+	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
-func handleRequest(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello !"))
+	log.Println("Start server " + port)
+	err := http.ListenAndServe(port, mux)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

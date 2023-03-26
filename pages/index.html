@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Let's do it together.</title>
+    <title>{{ .Title }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
@@ -38,27 +38,20 @@
     <main class="main-block">
         <section class="main-block__chapter chapter">
             <h2 class="chapter__title">Featured Posts</h2>
+            {{ range .FeaturedPosts }}
             <div class="chapter__cards cards">
                 <div class="cards__big-card cards__big-card_background_the-road-ahead big-card">
-                    <h3 class="big-card__title">The Road Ahead</h3>
-                    <p class="big-card__description">The road ahead might be paved - it might not be.</p>
+                    <span class="big-card__icon">{{ .Label }}</span>
+                    <h3 class="big-card__title">{{ .Title }}</h3>
+                    <p class="big-card__description">{{ .Subtitle }}</p>
                     <div class="big-card__about-block about-block">
-                        <img class="about-block__avatar" src="./avatars/Mat_Vogels.jpg" alt="Mat Vogels">
-                        <span class="about-block__name">Mat Vogels</span>
-                        <span class="about-block__date">September 25, 2015</span>
-                    </div>
-                </div>
-                <div class="cards__big-card cards__big-card_background_from-top-down big-card">
-                    <span class="big-card__icon">Adventure</span>
-                    <h3 class="big-card__title">From Top Down</h3>
-                    <p class="big-card__description">Once a year, go someplace you’ve never been before.</p>
-                    <div class="big-card__about-block about-block">
-                        <img class="about-block__avatar" src="./avatars/William_Wong.jpg" alt="William Wong">
-                        <span class="about-block__name">William Wong</span>
-                        <span class="about-block__date">September 25, 2015</span>
+                        <img class="about-block__avatar" {{ .Avatar }} alt="{{ .Author }}">
+                        <span class="about-block__name">{{ .Author }}</span>
+                        <span class="about-block__date">{{ .PostDate }}</span>
                     </div>
                 </div>
             </div>
+            {{ end }}
         </section>
         <section class="main-block__chapter chapter">
             <h2 class="chapter__title">Most Recent</h2>
