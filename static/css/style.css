@@ -6,7 +6,7 @@
 .header {
     height: 500px;
     text-align: center;
-    background: url(/img/header_fon.jpg) no-repeat;
+    background: url(/static/img/header_fon.jpg) no-repeat;
     background-size: cover;
 }
 
@@ -121,11 +121,11 @@
 }
 
 .cards__big-card_background_the-road-ahead {
-    background: url(/img/the-road-ahead.jpg);
+    background: url(/static/img/the-road-ahead.jpg);
 }
 
 .cards__big-card_background_from-top-down {
-    background: url(/img/from-top-down.jpg);
+    background: url(/static/img/from-top-down.jpg);
 }
 
 .big-card__icon {
@@ -220,7 +220,7 @@
 }
 
 .footer {
-    background-image: url(/img/footer_fon.jpg);
+    background-image: url(/static/img/footer_fon.jpg);
     background-size: cover;
 }
 

@@ -14,7 +14,7 @@ type indexPage struct {
 type featuredPostData struct {
 	Title    string
 	Subtitle string
-	// ImgPost  string
+	ImgPost  string
 	Label    string
 	Author   string
 	Avatar   string
@@ -47,19 +47,19 @@ func featuredPosts() []featuredPostData {
 		{
 			Title:    "The Road Ahead",
 			Subtitle: "The road ahead might be paved - it might not be.",
-			// ImgPost:  "url(/img/the-road-ahead.jpg)",
+			ImgPost:  "cards__big-card_background_the-road-ahead",
 			Label:    "Adventure",
 			Author:   "Mat Vogels",
-			Avatar:   "src='./avatars/Mat_Vogels.jpg'",
+			Avatar:   "src='./static/avatars/Mat_Vogels.jpg'",
 			PostDate: "September 25, 2015",
 		},
 		{
 			Title:    "From Top Down",
 			Subtitle: "Once a year, go someplace you’ve never been before.",
-			// ImgPost:  "url(/img/the-road-ahead.jpg)",
+			ImgPost:  "cards__big-card_background_from-top-down",
 			Label:    "Adventure",
 			Author:   "William Wong",
-			Avatar:   "src='./avatars/William_Wong.jpg'",
+			Avatar:   "src='./static/avatars/William_Wong.jpg'",
 			PostDate: "September 25, 2015",
 		},
 	}

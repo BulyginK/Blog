@@ -9,13 +9,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <body>
     <header class="header">
         <div class="header__nav nav-menu">
-            <img class="nav-menu__logo" src="./img/Escape.svg" alt="Logo">
+            <img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo">
             <nav class="nav-menu__nav-items nav-items">
                 <a class="nav-items__item nav-items__item-color-white" href="#">Home</a>
                 <a class="nav-items__item nav-items__item-color-white" href="#">Categories</a>
@@ -40,7 +40,7 @@
             <h2 class="chapter__title">Featured Posts</h2>
             {{ range .FeaturedPosts }}
             <div class="chapter__cards cards">
-                <div class="cards__big-card cards__big-card_background_the-road-ahead big-card">
+                <div class="cards__big-card {{ .ImgPost }} big-card">
                     <span class="big-card__icon">{{ .Label }}</span>
                     <h3 class="big-card__title">{{ .Title }}</h3>
                     <p class="big-card__description">{{ .Subtitle }}</p>
@@ -57,66 +57,66 @@
             <h2 class="chapter__title">Most Recent</h2>
             <div class="chapter__cards cards">
                 <div class="cards__small-card small-card">
-                    <img class="small-card__img" src="./img/Still_Standing_Tall.jpg" alt="Still Standing Tall">
+                    <img class="small-card__img" src="/static/img/Still_Standing_Tall.jpg" alt="Still Standing Tall">
                     <h3 class="small-card__title">Still Standing Tall</h3>
                     <p class="small-card__description">Life begins at the end of your comfort zone.</p>
                     <div class="small-card__about-block about-block">
-                        <img class="about-block__avatar" src="./avatars/William_Wong.jpg" alt="William Wong">
+                        <img class="about-block__avatar" src="/static/avatars/William_Wong.jpg" alt="William Wong">
                         <span class="about-block__name">William Wong</span>
                         <span class="about-block__date">9/25/2015</span>
                     </div>
                 </div>
                 <div class="cards__small-card small-card">
-                    <img class="small-card__img" src="./img/Sunny_Side_Up.jpg" alt="Sunny Side Up">
+                    <img class="small-card__img" src="./static/img/Sunny_Side_Up.jpg" alt="Sunny Side Up">
                     <h3 class="small-card__title">Sunny Side Up</h3>
                     <p class="small-card__description">No place is ever as bad as they tell you it’s going to be.
                     </p>
                     <div class="small-card__about-block about-block">
-                        <img class="about-block__avatar" src="./avatars/Mat_Vogels.jpg" alt="Mat Vogels">
+                        <img class="about-block__avatar" src="/static/avatars/Mat_Vogels.jpg" alt="Mat Vogels">
                         <span class="about-block__name">Mat Vogels</span>
                         <span class="about-block__date">9/25/2015</span>
                     </div>
                 </div>
                 <div class="cards__small-card small-card">
-                    <img class="small-card__img" src="./img/Water_Falls.jpg" alt="Water Falls">
+                    <img class="small-card__img" src="/static/img/Water_Falls.jpg" alt="Water Falls">
                     <h3 class="small-card__title">Water Falls</h3>
                     <p class="small-card__description">We travel not to escape life, but for life not to escape
                         us.
                     </p>
                     <div class="small-card__about-block about-block">
-                        <img class="about-block__avatar" src="./avatars/Mat_Vogels.jpg" alt="Mat Vogels">
+                        <img class="about-block__avatar" src="/static/avatars/Mat_Vogels.jpg" alt="Mat Vogels">
                         <span class="about-block__name">Mat Vogels</span>
                         <span class="about-block__date">9/25/2015</span>
                     </div>
                 </div>
                 <div class="cards__small-card small-card">
-                    <img class="small-card__img" src="./img/Through_the_Mist.jpg" alt="Through the Mist">
+                    <img class="small-card__img" src="/static/img/Through_the_Mist.jpg" alt="Through the Mist">
                     <h3 class="small-card__title">Through the Mist</h3>
                     <p class="small-card__description">Travel makes you see what a tiny place you occupy in the
                         world.</p>
                     <div class="small-card__about-block about-block">
-                        <img class="about-block__avatar" src="./avatars/William_Wong.jpg" alt="William Wong">
+                        <img class="about-block__avatar" src="/static/avatars/William_Wong.jpg" alt="William Wong">
                         <span class="about-block__name">William Wong</span>
                         <span class="about-block__date">9/25/2015</span>
                     </div>
                 </div>
                 <div class="cards__small-card small-card">
-                    <img class="small-card__img" src="./img/Awaken_Early.jpg" alt="Awaken Early">
+                    <img class="small-card__img" src="/static/img/Awaken_Early.jpg" alt="Awaken Early">
                     <h3 class="small-card__title">Awaken Early</h3>
                     <p class="small-card__description">Not all those who wander are lost.</p>
                     <div class="small-card__about-block about-block">
-                        <img class="about-block__avatar" src="./avatars/Mat_Vogels.jpg" alt="Mat Vogels">
+                        <img class="about-block__avatar" src="/static/avatars/Mat_Vogels.jpg" alt="Mat Vogels">
                         <span class="about-block__name">Mat Vogels</span>
                         <span class="about-block__date">9/25/2015</span>
                     </div>
                 </div>
                 <div class="cards__small-card small-card">
-                    <img class="small-card__img" src="./img/Try_it_Always.jpg" alt="Try it Always">
+                    <img class="small-card__img" src="/static/img/Try_it_Always.jpg" alt="Try it Always">
                     <h3 class="small-card__title">Try it Always</h3>
                     <p class="small-card__description">The world is a book, and those who do not travel read only
                         one page.</p>
                     <div class="small-card__about-block about-block">
-                        <img class="about-block__avatar" src="./avatars/Mat_Vogels.jpg" alt="Mat Vogels">
+                        <img class="about-block__avatar" src="/static/avatars/Mat_Vogels.jpg" alt="Mat Vogels">
                         <span class="about-block__name">Mat Vogels</span>
                         <span class="about-block__date">9/25/2015</span>
                     </div>
@@ -135,9 +135,9 @@
         </form>
         <div class="footer__nav-menu">
             <div class="nav-menu">
-                <img class="nav-menu__logo" src="./img/Escape.svg" alt="Logo">
+                <img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo">
                 <nav class="nav-menu__nav-items nav-items">
-                    <a class="nav-items__item nav-items__item-color-gray" href="/index+style.html">Home</a>
+                    <a class="nav-items__item nav-items__item-color-gray" href="#">Home</a>
                     <a class="nav-items__item nav-items__item-color-gray" href="#">Categories</a>
                     <a class="nav-items__item nav-items__item-color-gray" href="#">About</a>
                     <a class="nav-items__item nav-items__item-color-gray" href="#">Contact</a>
