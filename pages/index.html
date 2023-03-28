@@ -28,20 +28,17 @@
         <button class="header__button">View Latest Posts</button>
     </header>
     <nav class="nav-block">
-        <a class="nav-block__item" href="#">Nature</a>
-        <a class="nav-block__item" href="#">Photography</a>
-        <a class="nav-block__item" href="#">Relaxation</a>
-        <a class="nav-block__item" href="#">Vacation</a>
-        <a class="nav-block__item" href="#">Travel</a>
-        <a class="nav-block__item" href="#">Adventure</a>
+        {{ range .NavBlock }}
+        <a class="nav-block__item" href="{{ .HrefItem }}">{{ .NavBlockItem }}</a>
+        {{ end }}
     </nav>
     <main class="main-block">
         <section class="main-block__chapter chapter">
             <h2 class="chapter__title">Featured Posts</h2>
             <div class="chapter__cards cards">
                 {{ range .FeaturedPosts }}
-                <div class="cards__big-card {{ .ImgPost }} big-card" {{ .PostHidden }}>
-                    <span class="big-card__icon" {{ .LabelHidden }}>{{ .Label }}</span>
+                <div class="cards__big-card {{ .ImgPost }} big-card">
+                    <span class="big-card__icon" {{ .LabelHidden }}>{{ .AdventLabel }}</span>
                     <h3 class="big-card__title">{{ .Title }}</h3>
                     <p class="big-card__description">{{ .Subtitle }}</p>
                     <div class="big-card__about-block about-block">

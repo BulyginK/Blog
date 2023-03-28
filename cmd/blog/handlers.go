@@ -8,8 +8,14 @@ import (
 
 type indexPage struct {
 	Title         string
+	NavBlock      []navBlockData
 	FeaturedPosts []featuredPostData
 	MostRecent    []mostRecentData
+}
+
+type navBlockData struct {
+	NavBlockItem string
+	HrefItem     string
 }
 
 type featuredPostData struct {
@@ -17,7 +23,7 @@ type featuredPostData struct {
 	Title       string
 	Subtitle    string
 	ImgPost     string
-	Label       string
+	AdventLabel string
 	LabelHidden string
 	Author      string
 	Avatar      string
@@ -44,6 +50,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 	data := indexPage{
 		Title:         "Escape",
+		NavBlock:      navBlockItems(),
 		FeaturedPosts: featuredPosts(),
 		MostRecent:    mostRecent(),
 	}
@@ -56,26 +63,53 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func navBlockItems() []navBlockData {
+	return []navBlockData{
+		{
+			NavBlockItem: "Nature",
+			HrefItem:     "#",
+		},
+		{
+			NavBlockItem: "Photography",
+			HrefItem:     "#",
+		},
+		{
+			NavBlockItem: "Relaxation",
+			HrefItem:     "#",
+		},
+		{
+			NavBlockItem: "Vacation",
+			HrefItem:     "#",
+		},
+		{
+			NavBlockItem: "Travel",
+			HrefItem:     "#",
+		},
+		{
+			NavBlockItem: "Adventure",
+			HrefItem:     "#",
+		},
+	}
+}
+
 func featuredPosts() []featuredPostData {
 	return []featuredPostData{
 		{
-			PostHidden:  "",
 			Title:       "The Road Ahead",
 			Subtitle:    "The road ahead might be paved - it might not be.",
 			ImgPost:     "cards__big-card_background_the-road-ahead",
-			Label:       "Adventure",
+			AdventLabel: "Adventure",
 			LabelHidden: "hidden",
 			Author:      "Mat Vogels",
 			Avatar:      "./static/avatars/Mat_Vogels.jpg",
 			PostDate:    "September 25, 2015",
 		},
 		{
-			PostHidden:  "",
 			Title:       "From Top Down",
 			Subtitle:    "Once a year, go someplace you’ve never been before.",
 			ImgPost:     "cards__big-card_background_from-top-down",
-			Label:       "Adventure",
-			LabelHidden: "",
+			AdventLabel: "Adventure",
+			LabelHidden: "visible",
 			Author:      "William Wong",
 			Avatar:      "./static/avatars/William_Wong.jpg",
 			PostDate:    "September 25, 2015",
