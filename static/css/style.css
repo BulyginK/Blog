@@ -114,7 +114,7 @@
     width: 420px;
     height: 245px;
     margin: 7px 10px;
-    padding: 20px 7px 15px 20px;
+    padding: 20px 20px 15px 20px;
     text-align: left;
     border-radius: 3px;
     color: #FFFFFF;
@@ -170,7 +170,7 @@
 
 .about-block__date {
     position: absolute;
-    right: 13px;
+    right: 0;
     font: 12px/35px 'Oxygen', sans-serif;
 }
 
@@ -213,7 +213,7 @@
     justify-content: start;
     position: relative;
     height: 48px;
-    padding-left: 13px;
+    margin: 0 13px;
     background-color: #FCFCFC;
     border-top: 1px solid #EFEFEF;
     color: #999999;
