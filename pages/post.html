@@ -5,29 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The road ahead</title>
+    <title>{{ .Title }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/the-road-ahead.css">
+    <link rel="stylesheet" href="/static/css/post.css">
 </head>
 
 <body>
     <header class="header">
         <div class="header__header-nav header-nav">
-            <img src="./img/Escape_black.svg" alt="Logo">
+            <img class="nav-menu__logo" src="/static/img/Escape_black.svg" alt="Logo">
             <nav class="header-nav__header-menu header-menu">
-                <a class="header-menu__nav-item" href="#">Home</a>
-                <a class="header-menu__nav-item" href="#">Categories</a>
-                <a class="header-menu__nav-item" href="#">About</a>
-                <a class="header-menu__nav-item" href="#">Contact</a>
+                {{ range .Menu }}
+                <a class="header-menu__nav-item" href="{{ .HrefMenuItem }}">{{ .MenuItem }}</a>
+                {{ end }}
             </nav>
         </div>
     </header>
     <article class="main-block">
-        <h1 class="main-block__title">The Road Ahead</h1>
+        <h1 class="main-block__title">{{ .Title }}</h1>
         <p class="main-block__slogan">The road ahead might be paved - it might not be.</p>
-        <img class="main-block__img" src=" /img/the-road-ahead_full.jpg" alt="the_road_ahead">
+        <img class="main-block__img" src="/static/img/the-road-ahead_full.jpg" alt="the_road_ahead">
         <div class="main-block__chapter chapter">
             <p class="chapter__paragraph">
                 Dark spruce forest frowned on either side the frozen waterway. The trees had
@@ -83,12 +82,11 @@
         </form>
         <div class="footer__nav-menu">
             <div class="nav-menu">
-                <img class="nav-menu__logo" src="./img/Escape.svg" alt="Logo">
+                <img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo">
                 <nav class="nav-menu__nav-items nav-items">
-                    <a class="nav-items__item nav-items__item-color-gray" href="/index+style.html">Home</a>
-                    <a class="nav-items__item nav-items__item-color-gray" href="#">Categories</a>
-                    <a class="nav-items__item nav-items__item-color-gray" href="#">About</a>
-                    <a class="nav-items__item nav-items__item-color-gray" href="#">Contact</a>
+                    {{ range .Menu }}
+                    <a class="nav-items__item nav-items__item-color-gray" href="{{ .HrefMenuItem }}">{{ .MenuItem }}</a>
+                    {{ end }}
                 </nav>
             </div>
         </div>

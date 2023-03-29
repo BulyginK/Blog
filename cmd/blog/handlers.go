@@ -8,9 +8,20 @@ import (
 
 type indexPage struct {
 	Title         string
+	Menu          []menuData
 	NavBlock      []navBlockData
 	FeaturedPosts []featuredPostData
 	MostRecent    []mostRecentData
+}
+
+type postPage struct {
+	Title string
+	Menu  []menuData
+}
+
+type menuData struct {
+	MenuItem     string
+	HrefMenuItem string
 }
 
 type navBlockData struct {
@@ -50,6 +61,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 	data := indexPage{
 		Title:         "Escape",
+		Menu:          menuNavItems(),
 		NavBlock:      navBlockItems(),
 		FeaturedPosts: featuredPosts(),
 		MostRecent:    mostRecent(),
@@ -60,6 +72,48 @@ func index(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal Server Error", 500)
 		log.Println(err.Error())
 		return
+	}
+}
+
+func post(w http.ResponseWriter, r *http.Request) {
+	ts, err := template.ParseFiles("pages/post.html") // Главная страница блога
+	if err != nil {
+		http.Error(w, "Internal Server Error", 500) // В случае ошибки парсинга - возвращаем 500
+		log.Println(err.Error())
+		return
+	}
+
+	data := postPage{
+		Title: "The road ahead",
+		Menu:  menuNavItems(),
+	}
+
+	err = ts.Execute(w, data) // Запускаем шаблонизатор для вывода шаблона в тело ответа
+	if err != nil {
+		http.Error(w, "Internal Server Error", 500)
+		log.Println(err.Error())
+		return
+	}
+}
+
+func menuNavItems() []menuData {
+	return []menuData{
+		{
+			MenuItem:     "Home",
+			HrefMenuItem: "#",
+		},
+		{
+			MenuItem:     "Categories",
+			HrefMenuItem: "#",
+		},
+		{
+			MenuItem:     "About",
+			HrefMenuItem: "#",
+		},
+		{
+			MenuItem:     "Contact",
+			HrefMenuItem: "#",
+		},
 	}
 }
 

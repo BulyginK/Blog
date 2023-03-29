@@ -17,10 +17,9 @@
         <div class="header__nav nav-menu">
             <img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo">
             <nav class="nav-menu__nav-items nav-items">
-                <a class="nav-items__item nav-items__item-color-white" href="#">Home</a>
-                <a class="nav-items__item nav-items__item-color-white" href="#">Categories</a>
-                <a class="nav-items__item nav-items__item-color-white" href="#">About</a>
-                <a class="nav-items__item nav-items__item-color-white" href="#">Contact</a>
+                {{ range .Menu }}
+                <a class="nav-items__item nav-items__item-color-white" href="{{ .HrefMenuItem }}">{{ .MenuItem }}</a>
+                {{ end }}
             </nav>
         </div>
         <h1 class="header__title">Let's do it together.</h1>
@@ -59,7 +58,7 @@
                     <h3 class="small-card__title">{{ .Title }}</h3>
                     <p class="small-card__description">{{ .Subtitle }}</p>
                     <div class="small-card__about-block about-block">
-                        <img class="about-block__avatar" src=" {{ .Avatar }}" alt="{{ .Author }}">
+                        <img class="about-block__avatar" src="{{ .Avatar }}" alt="{{ .Author }}">
                         <span class="about-block__name">{{ .Author }}</span>
                         <span class="about-block__date">{{ .PostDate }}</span>
                     </div>
@@ -81,10 +80,9 @@
             <div class="nav-menu">
                 <img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo">
                 <nav class="nav-menu__nav-items nav-items">
-                    <a class="nav-items__item nav-items__item-color-gray" href="#">Home</a>
-                    <a class="nav-items__item nav-items__item-color-gray" href="#">Categories</a>
-                    <a class="nav-items__item nav-items__item-color-gray" href="#">About</a>
-                    <a class="nav-items__item nav-items__item-color-gray" href="#">Contact</a>
+                    {{ range .Menu }}
+                    <a class="nav-items__item nav-items__item-color-gray" href="{{ .HrefMenuItem }}">{{ .MenuItem }}</a>
+                    {{ end }}
                 </nav>
             </div>
         </div>

@@ -65,58 +65,6 @@
     color: #101315;
 }
 
-.footer {
-    background-image: url(/img/footer_fon.jpg);
-    background-size: cover;
-}
-
-.footer__form {
-    padding: 81px 0 90px;
-}
-
-.form__title {
-    width: 188px;
-    height: 47px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    font: 25px/30px 'Oxygen', sans-serif;
-    letter-spacing: 2px;
-    color: #EFEFEF;
-    border-bottom: 1px solid #DEDEDE;
-}
-
-.form__email-form {
-    display: flex;
-    justify-content: center;
-}
-
-.email-form__input {
-    border: none; 
-    outline: none;
-    width: 375px;
-    height: 50px;
-    padding-left: 35px;
-    border-radius: 3px 0px 0px 3px;
-    font: 12px/14px 'Roboto', sans-serif;
-}
-
-.email-form__button {
-    border: none; 
-    outline: none;
-    padding: 18px 44px;
-    background: rgba(255, 255, 255, 0.28);
-    border-radius: 0px 3px 3px 0px;
-    color: #F8F8F8;
-    font: 12px/14px 'Roboto', sans-serif;
-}
-
-.footer__nav-menu {
-    display: flex;
-    align-items: center;
-    height: 89px;
-    background: rgba(35, 47, 56, 0.6);
-}
-
 .nav-menu {
     display: flex;
     align-items: center;
@@ -143,4 +91,56 @@
     padding-left: 20px;
     font: 11px/26px 'Oxygen', sans-serif;
     color: rgba(255, 255, 255, 0.6);
+}
+
+.footer {
+    background-image: url(/static/img/footer_fon.jpg);
+    background-size: cover;
+}
+
+.footer__form {
+    padding: 81px 0 90px;
+}
+
+.form__title {
+    width: 188px;
+    height: 47px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font: 25px/30px 'Oxygen', sans-serif;
+    letter-spacing: 2px;
+    color: #EFEFEF;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+.form__email-form {
+    display: flex;
+    justify-content: center;
+}
+
+.email-form__input {
+    border: none;
+    outline: none;
+    width: 375px;
+    height: 50px;
+    padding-left: 35px;
+    border-radius: 3px 0px 0px 3px;
+    font: 12px/14px 'Roboto', sans-serif;
+}
+
+.email-form__button {
+    border: none;
+    outline: none;
+    padding: 18px 44px;
+    background: rgba(255, 255, 255, 0.28);
+    border-radius: 0px 3px 3px 0px;
+    color: #F8F8F8;
+    font: 12px/14px 'Roboto', sans-serif;
+}
+
+.footer__nav-menu {
+    display: flex;
+    align-items: center;
+    height: 89px;
+    background: rgba(35, 47, 56, 0.6);
 }
