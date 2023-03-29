@@ -17,9 +17,10 @@
         <div class="header__nav nav-menu">
             <img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo">
             <nav class="nav-menu__nav-items nav-items">
-                {{ range .Menu }}
-                <a class="nav-items__item nav-items__item-color-white" href="{{ .HrefMenuItem }}">{{ .MenuItem }}</a>
-                {{ end }}
+                <a class="nav-items__item nav-items__item-color-white" href="#">Home</a>
+                <a class="nav-items__item nav-items__item-color-white" href="#">Categories</a>
+                <a class="nav-items__item nav-items__item-color-white" href="#">About</a>
+                <a class="nav-items__item nav-items__item-color-white" href="#">Contact</a>
             </nav>
         </div>
         <h1 class="header__title">Let's do it together.</h1>
@@ -27,9 +28,12 @@
         <button class="header__button">View Latest Posts</button>
     </header>
     <nav class="nav-block">
-        {{ range .NavBlock }}
-        <a class="nav-block__item" href="{{ .HrefItem }}">{{ .NavBlockItem }}</a>
-        {{ end }}
+        <a class="nav-block__item" href="#">Nature</a>
+        <a class="nav-block__item" href="#">Photography</a>
+        <a class="nav-block__item" href="#">Relaxation</a>
+        <a class="nav-block__item" href="#">Vacation</a>
+        <a class="nav-block__item" href="#">Travel</a>
+        <a class="nav-block__item" href="#">Adventure</a>
     </nav>
     <main class="main-block">
         <section class="main-block__chapter chapter">
@@ -37,7 +41,9 @@
             <div class="chapter__cards cards">
                 {{ range .FeaturedPosts }}
                 <div class="cards__big-card {{ .ImgPost }} big-card">
-                    <span class="big-card__icon" {{ .LabelHidden }}>{{ .AdventLabel }}</span>
+                    {{ if .Label }}
+                    <span class="big-card__icon">{{ .Label }}</span>
+                    {{ end }}
                     <h3 class="big-card__title">{{ .Title }}</h3>
                     <p class="big-card__description">{{ .Subtitle }}</p>
                     <div class="big-card__about-block about-block">
@@ -80,9 +86,10 @@
             <div class="nav-menu">
                 <img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo">
                 <nav class="nav-menu__nav-items nav-items">
-                    {{ range .Menu }}
-                    <a class="nav-items__item nav-items__item-color-gray" href="{{ .HrefMenuItem }}">{{ .MenuItem }}</a>
-                    {{ end }}
+                    <a class="nav-items__item nav-items__item-color-gray" href="#">Home</a>
+                    <a class="nav-items__item nav-items__item-color-gray" href="#">Categories</a>
+                    <a class="nav-items__item nav-items__item-color-gray" href="#">About</a>
+                    <a class="nav-items__item nav-items__item-color-gray" href="#">Contact</a>
                 </nav>
             </div>
         </div>
