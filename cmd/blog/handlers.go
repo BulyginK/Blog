@@ -15,8 +15,10 @@ type indexPage struct {
 }
 
 type postPage struct {
-	Title string
-	Menu  []menuData
+	Title    string
+	Menu     []menuData
+	Subtitle string
+	ImgPost  string
 }
 
 type menuData struct {
@@ -84,8 +86,10 @@ func post(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := postPage{
-		Title: "The road ahead",
-		Menu:  menuNavItems(),
+		Title:    "The road ahead",
+		Menu:     menuNavItems(),
+		Subtitle: "The road ahead might be paved - it might not be.",
+		ImgPost:  "/static/img/the-road-ahead_full.jpg",
 	}
 
 	err = ts.Execute(w, data) // Запускаем шаблонизатор для вывода шаблона в тело ответа

@@ -25,8 +25,8 @@
     </header>
     <article class="main-block">
         <h1 class="main-block__title">{{ .Title }}</h1>
-        <p class="main-block__slogan">The road ahead might be paved - it might not be.</p>
-        <img class="main-block__img" src="/static/img/the-road-ahead_full.jpg" alt="the_road_ahead">
+        <p class="main-block__slogan">{{ .Subtitle }}</p>
+        <img class="main-block__img" src="{{ .ImgPost }}" alt="{{ .Title }}">
         <div class="main-block__chapter chapter">
             <p class="chapter__paragraph">
                 Dark spruce forest frowned on either side the frozen waterway. The trees had
@@ -69,14 +69,14 @@
                 on colossal adventure, pitting themselves against the might of a world as remote and alien and pulseless
                 as the abysses of space.
             </p>
-
         </div>
     </article>
     <footer class="footer">
         <form class="footer__form form" action="" method="get">
             <h3 class="form__title">Stay in Touch</h3>
             <div class="form__email-form">
-                <input class="email-form__input" type="email" name="email" id="email" placeholder="Enter your email address" required>
+                <input class="email-form__input" type="email" name="email" id="email"
+                    placeholder="Enter your email address" required>
                 <button class="email-form__button" type="submit">Submit</button>
             </div>
         </form>
