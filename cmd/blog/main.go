@@ -24,18 +24,16 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/home", index(dbx))
-	mux.HandleFunc("/post", post(dbx))
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	log.Println("Start server " + port)
-	err := http.ListenAndServe(port, mux)
+	err = http.ListenAndServe(port, mux)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func openDB() (*sql.DB, error) {
-	// Здесь прописываем соединение к базе данных
 	return sql.Open(dbDriverName, "root:12345678@tcp(localhost:3306)/blog?charset=utf8mb4&collation=utf8mb4_unicode_ci&parseTime=true")
 }
