@@ -4,9 +4,13 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+
+	"github.com/jmoiron/sqlx"
 )
 
-type indexPage struct {
+type indexPageData struct {
+	Title         string
+	Subtitle      string
 	FeaturedPosts []featuredPostData
 	MostRecent    []mostRecentData
 }
@@ -19,43 +23,80 @@ type postPage struct {
 }
 
 type featuredPostData struct {
-	Title    string
-	Subtitle string
-	ImgPost  string
-	Label    string
-	Author   string
-	Avatar   string
-	PostDate string
+	Title    string `db:"title"`
+	Subtitle string `db:"subtitle"`
+	ImgPost  string `db:"img_post_style"`
+	Label    string `db:"label"`
+	Author   string `db:"author"`
+	Avatar   string `db:"author_ur"`
+	PostDate string `db:"publish_date"`
 }
 
 type mostRecentData struct {
-	Title    string
-	Subtitle string
-	ImgPost  string
-	Author   string
-	Avatar   string
-	PostDate string
+	Title    string `db:"title"`
+	Subtitle string `db:"subtitle"`
+	ImgPost  string `db:"image_url"`
+	Author   string `db:"author"`
+	Avatar   string `db:"author_ur"`
+	PostDate string `db:"publish_date"`
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
-	ts, err := template.ParseFiles("pages/index.html") // Главная страница блога
+func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		posts, err := featuredPosts(db)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		ts, err := template.ParseFiles("pages/index.html")
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		data := indexPageData{
+			Title:         "Blog for traveling",
+			Subtitle:      "My best blog for adventures and burgers",
+			FeaturedPosts: posts,
+		}
+
+		err = ts.Execute(w, data) // Заставляем шаблонизатор вывести шаблон в тело ответа
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		log.Println("Request completed successfully")
+	}
+}
+
+func featuredPosts(db *sqlx.DB) ([]featuredPostData, error) {
+	const query = `
+		SELECT
+			title,
+			subtitle,
+			img_post_style,
+			label,
+			author,
+			author_ur,
+			publish_date
+		FROM
+			post
+		WHERE featured = 1
+	`
+
+	var posts []featuredPostData
+
+	err := db.Select(&posts, query)
 	if err != nil {
-		http.Error(w, "Internal Server Error", 500) // В случае ошибки парсинга - возвращаем 500
-		log.Println(err.Error())
-		return
+		return nil, err
 	}
 
-	data := indexPage{
-		FeaturedPosts: featuredPosts(),
-		MostRecent:    mostRecent(),
-	}
-
-	err = ts.Execute(w, data) // Запускаем шаблонизатор для вывода шаблона в тело ответа
-	if err != nil {
-		http.Error(w, "Internal Server Error", 500)
-		log.Println(err.Error())
-		return
-	}
+	return posts, nil
 }
 
 func post(w http.ResponseWriter, r *http.Request) {
@@ -84,81 +125,5 @@ But at front and rear, unawed and indomitable, toiled the two men who were not y
 		http.Error(w, "Internal Server Error", 500)
 		log.Println(err.Error())
 		return
-	}
-}
-
-func featuredPosts() []featuredPostData {
-	return []featuredPostData{
-		{
-			Title:    "The Road Ahead",
-			Subtitle: "The road ahead might be paved - it might not be.",
-			ImgPost:  "cards__big-card_background_the-road-ahead",
-			Label:    "",
-			Author:   "Mat Vogels",
-			Avatar:   "./static/avatars/Mat_Vogels.jpg",
-			PostDate: "September 25, 2015",
-		},
-		{
-			Title:    "From Top Down",
-			Subtitle: "Once a year, go someplace you’ve never been before.",
-			ImgPost:  "cards__big-card_background_from-top-down",
-			Label:    "Adventure",
-			Author:   "William Wong",
-			Avatar:   "./static/avatars/William_Wong.jpg",
-			PostDate: "September 25, 2015",
-		},
-	}
-}
-
-func mostRecent() []mostRecentData {
-	return []mostRecentData{
-		{
-			ImgPost:  "./static/img/Still_Standing_Tall.jpg",
-			Title:    "Still Standing Tall",
-			Subtitle: "Life begins at the end of your comfort zone.",
-			Author:   "William Wong",
-			Avatar:   "./static/avatars/William_Wong.jpg",
-			PostDate: "9/25/2015",
-		},
-		{
-			ImgPost:  "./static/img/Sunny_Side_Up.jpg",
-			Title:    "Sunny Side Up",
-			Subtitle: "No place is ever as bad as they tell you it’s going to be.",
-			Author:   "Mat Vogels",
-			Avatar:   "./static/avatars/Mat_Vogels.jpg",
-			PostDate: "9/25/2015",
-		},
-		{
-			ImgPost:  "./static/img/Water_Falls.jpg",
-			Title:    "Water Falls",
-			Subtitle: "We travel not to escape life, but for life not to escape us.",
-			Author:   "Mat Vogels",
-			Avatar:   "./static/avatars/Mat_Vogels.jpg",
-			PostDate: "9/25/2015",
-		},
-		{
-			ImgPost:  "./static/img/Through_the_Mist.jpg",
-			Title:    "Through the Mist",
-			Subtitle: "Travel makes you see what a tiny place you occupy in the world.",
-			Author:   "William Wong",
-			Avatar:   "./static/avatars/William_Wong.jpg",
-			PostDate: "9/25/2015",
-		},
-		{
-			ImgPost:  "./static/img/Awaken_Early.jpg",
-			Title:    "Awaken Early",
-			Subtitle: "Not all those who wander are lost.",
-			Author:   "Mat Vogels",
-			Avatar:   "./static/avatars/Mat_Vogels.jpg",
-			PostDate: "9/25/2015",
-		},
-		{
-			ImgPost:  "./static/img/Try_it_Always.jpg",
-			Title:    "Try it Always",
-			Subtitle: "The world is a book, and those who do not travel read only one page.",
-			Author:   "Mat Vogels",
-			Avatar:   "./static/avatars/Mat_Vogels.jpg",
-			PostDate: "9/25/2015",
-		},
 	}
 }
