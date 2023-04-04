@@ -122,10 +122,42 @@
 
 .cards__big-card_background_the-road-ahead {
     background: url(/static/img/the-road-ahead.jpg);
+    background-size: 100% 100%;
 }
 
 .cards__big-card_background_from-top-down {
     background: url(/static/img/from-top-down.jpg);
+    background-size: 100% 100%;
+}
+
+.cards__big-card_background_still-standing-tall {
+    background: url(/static/img/Still_Standing_Tall.jpg);
+    background-size: 100% 100%;
+}
+
+.cards__big-card_background_sunny-side-up {
+    background: url(/static/img/Sunny_Side_Up.jpg);
+    background-size: 100% 100%;
+}
+
+.cards__big-card_background_water-falls {
+    background: url(/static/img/Water_Falls.jpg);
+    background-size: 100% 100%;
+}
+
+.cards__big-card_background_through-the-mist {
+    background: url(/static/img/Through_the_Mist.jpg);
+    background-size: 100% 100%;
+}
+
+.cards__big-card_background_awaken-early {
+    background: url(/static/img/Awaken_Early.jpg);
+    background-size: 100% 100%;
+}
+
+.cards__big-card_background_try-it-always {
+    background: url(/static/img/Try_it_Always.jpg);
+    background-size: 100% 100%;
 }
 
 .big-card__icon {
@@ -189,6 +221,7 @@
 
 .small-card__img {
     position: absolute;
+    height: 150px;
     width: 100%;
     top: 0;
 }
