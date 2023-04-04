@@ -15,12 +15,12 @@ type indexPageData struct {
 	MostRecent    []mostRecentData
 }
 
-type postPage struct {
-	Title    string
-	Subtitle string
-	ImgPost  string
-	PostText string
-}
+// type postPage struct {
+// 	Title    string
+// 	Subtitle string
+// 	ImgPost  string
+// 	PostText string
+// }
 
 type featuredPostData struct {
 	Title    string `db:"title"`
