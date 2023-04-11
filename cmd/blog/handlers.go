@@ -9,24 +9,15 @@ import (
 )
 
 type indexPageData struct {
-	Title         string
-	Subtitle      string
 	FeaturedPosts []featuredPostData
 	MostRecent    []mostRecentData
 	// PostDate      time.Time `db:"date_new"`
 }
 
-// type postPage struct {
-// 	Title    string
-// 	Subtitle string
-// 	ImgPost  string
-// 	PostText string
-// }
-
 type featuredPostData struct {
 	Title    string `db:"title"`
 	Subtitle string `db:"subtitle"`
-	ImgPost  string `db:"img_post_style"`
+	ImgPost  string `db:"image_url"`
 	Label    string `db:"label"`
 	Author   string `db:"author"`
 	Avatar   string `db:"author_ur"`
@@ -73,8 +64,6 @@ func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		// }
 
 		data := indexPageData{
-			Title:         "Blog for traveling",
-			Subtitle:      "My best blog for adventures and burgers",
 			FeaturedPosts: postsFeatured,
 			MostRecent:    postsMostRecent,
 			// PostDate:      postDate,
@@ -96,7 +85,7 @@ func featuredPosts(db *sqlx.DB) ([]featuredPostData, error) {
 		SELECT
 			title,
 			subtitle,
-			img_post_style,
+			image_url,
 			label,
 			author,
 			author_ur,

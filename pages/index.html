@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/pages/main.js" defer></script>
 </head>
 
 <body>
@@ -40,7 +41,7 @@
             <h2 class="chapter__title">Featured Posts</h2>
             <div class="chapter__cards cards">
                 {{ range .FeaturedPosts }}
-                <div class="cards__big-card {{ .ImgPost }} big-card">
+                <div class="cards__big-card big-card" style="background: url({{.ImgPost}}); background-size: 100% 100%">
                     {{ if .Label }}
                     <span class="big-card__icon">{{ .Label }}</span>
                     {{ end }}
