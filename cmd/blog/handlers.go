@@ -13,6 +13,7 @@ type indexPageData struct {
 	Subtitle      string
 	FeaturedPosts []featuredPostData
 	MostRecent    []mostRecentData
+	// PostDate      time.Time `db:"date_new"`
 }
 
 // type postPage struct {
@@ -64,11 +65,19 @@ func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		// postDate, err := postDateNew(db)
+		// if err != nil {
+		// 	http.Error(w, "Internal Server Error", 500)
+		// 	log.Println(err)
+		// 	return
+		// }
+
 		data := indexPageData{
 			Title:         "Blog for traveling",
 			Subtitle:      "My best blog for adventures and burgers",
 			FeaturedPosts: postsFeatured,
 			MostRecent:    postsMostRecent,
+			// PostDate:      postDate,
 		}
 
 		err = ts.Execute(w, data) // Заставляем шаблонизатор вывести шаблон в тело ответа
@@ -130,3 +139,23 @@ func mostRecentPosts(db *sqlx.DB) ([]mostRecentData, error) {
 
 	return posts, nil
 }
+
+// func postDateNew(db *sqlx.DB) (time.Time, error) {
+
+// 	const query = `
+// 	SELECT
+// 	  date_new
+// 	FROM
+// 	  post
+// 	WHERE featured = 1
+// 	`
+
+// 	var post_date time.Time
+
+// 	err := db.Select(&post_date, query)
+// 	if err != nil {
+// 		return post_date, err
+// 	}
+
+// 	return post_date, nil
+// }
