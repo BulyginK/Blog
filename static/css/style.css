@@ -118,46 +118,7 @@
     text-align: left;
     border-radius: 3px;
     color: #FFFFFF;
-}
-
-.cards__big-card_background_the-road-ahead {
-    background: url(/static/img/the-road-ahead.jpg);
-    background-size: 100% 100%;
-}
-
-.cards__big-card_background_from-top-down {
-    background: url(/static/img/from-top-down.jpg);
-    background-size: 100% 100%;
-}
-
-.cards__big-card_background_still-standing-tall {
-    background: url(/static/img/Still_Standing_Tall.jpg);
-    background-size: 100% 100%;
-}
-
-.cards__big-card_background_sunny-side-up {
-    background: url(/static/img/Sunny_Side_Up.jpg);
-    background-size: 100% 100%;
-}
-
-.cards__big-card_background_water-falls {
-    background: url(/static/img/Water_Falls.jpg);
-    background-size: 100% 100%;
-}
-
-.cards__big-card_background_through-the-mist {
-    background: url(/static/img/Through_the_Mist.jpg);
-    background-size: 100% 100%;
-}
-
-.cards__big-card_background_awaken-early {
-    background: url(/static/img/Awaken_Early.jpg);
-    background-size: 100% 100%;
-}
-
-.cards__big-card_background_try-it-always {
-    background: url(/static/img/Try_it_Always.jpg);
-    background-size: 100% 100%;
+    text-decoration: none;
 }
 
 .big-card__icon {
@@ -174,12 +135,14 @@
 .big-card__title {
     padding-bottom: 5px;
     font: 27px/30px 'Lora', sans-serif;
+    text-decoration: none;
 }
 
 .big-card__description {
     padding-bottom: 12px;
     font: 14px/25px 'Oxygen', sans-serif;
     color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
 }
 
 .big-card__about-block {
@@ -198,12 +161,14 @@
 .about-block__name {
     padding-left: 10px;
     font: 11px/35px 'Oxygen', sans-serif;
+    text-decoration: none;
 }
 
 .about-block__date {
     position: absolute;
     right: 0;
     font: 12px/35px 'Oxygen', sans-serif;
+    text-decoration: none;
 }
 
 .cards__small-card {
@@ -217,6 +182,7 @@
     border-radius: 3px;
     text-align: left;
     background-color: #FFFFFF;
+    text-decoration: none;
 }
 
 .small-card__img {
@@ -230,6 +196,7 @@
     padding: 14px 13px 0;
     font: 16px/21px 'Lora', sans-serif;
     color: #101315;
+    text-decoration: none;
 }
 
 .small-card__description {
@@ -238,6 +205,7 @@
     padding: 6px 13px;
     font: 13px/19px 'Oxygen', sans-serif;
     color: #7A7A7A;
+    text-decoration: none;
 }
 
 .small-card__about-block {

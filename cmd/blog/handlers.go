@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -13,11 +14,15 @@ type indexPageData struct {
 	MostRecent    []mostRecentData
 }
 
-type post struct {
-	PagePost []postPageData
+type postPageData struct {
+	Title    string `db:"title"`
+	Subtitle string `db:"subtitle"`
+	ImgPost  string `db:"bigimage_url"`
+	PostText string `db:"post_text"`
 }
 
 type featuredPostData struct {
+	PostId   string `db:"post_id"`
 	Title    string `db:"title"`
 	Subtitle string `db:"subtitle"`
 	ImgPost  string `db:"image_url"`
@@ -28,19 +33,13 @@ type featuredPostData struct {
 }
 
 type mostRecentData struct {
+	PostId   string `db:"post_id"`
 	Title    string `db:"title"`
 	Subtitle string `db:"subtitle"`
 	ImgPost  string `db:"image_url"`
 	Author   string `db:"author"`
 	Avatar   string `db:"author_ur"`
 	PostDate string `db:"publish_date"`
-}
-
-type postPageData struct {
-	Title    string `db:"title"`
-	Subtitle string `db:"subtitle"`
-	ImgPost  string `db:"bigimage_url"`
-	PostText string `db:"post_text"`
 }
 
 func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
@@ -85,7 +84,8 @@ func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 func featuredPosts(db *sqlx.DB) ([]featuredPostData, error) {
 	const query = `
 		SELECT
-			title,
+		  post_id,
+		  title,
 			subtitle,
 			image_url,
 			label,
@@ -110,7 +110,8 @@ func featuredPosts(db *sqlx.DB) ([]featuredPostData, error) {
 func mostRecentPosts(db *sqlx.DB) ([]mostRecentData, error) {
 	const query = `
 		SELECT
-			title,
+		  post_id,
+		  title,
 			subtitle,
 			image_url,
 			author,
@@ -131,8 +132,14 @@ func mostRecentPosts(db *sqlx.DB) ([]mostRecentData, error) {
 	return posts, nil
 }
 
-func pagePost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
+func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		id, err := strconv.Atoi(r.URL.Query().Get("post_id"))
+		if err != nil || id < 1 {
+			http.Error(w, "Internal Server Error", 500)
+			return
+		}
+
 		postPageData, err := postPage(db)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
@@ -171,11 +178,12 @@ func postPage(db *sqlx.DB) ([]postPageData, error) {
 			post_text
 		FROM
 			post
+		AND id = ?	
 	`
 
 	var post []postPageData
 
-	err := db.Select(&post, query)
+	err := db.Get(&post, query)
 	if err != nil {
 		return nil, err
 	}

@@ -41,7 +41,8 @@
             <h2 class="chapter__title">Featured Posts</h2>
             <div class="chapter__cards cards">
                 {{ range .FeaturedPosts }}
-                <div class="cards__big-card big-card" style="background: url({{.ImgPost}}); background-size: 100% 100%">
+                <a href="/pages/post{{ .PostId }}.html" class="cards__big-card big-card"
+                    style="background: url({{.ImgPost}}); background-size: 100% 100%">
                     {{ if .Label }}
                     <span class="big-card__icon">{{ .Label }}</span>
                     {{ end }}
@@ -52,7 +53,7 @@
                         <span class="about-block__name">{{ .Author }}</span>
                         <span class="about-block__date">{{ .PostDate }}</span>
                     </div>
-                </div>
+                </a>
                 {{ end }}
             </div>
         </section>
@@ -60,7 +61,7 @@
             <h2 class="chapter__title">Most Recent</h2>
             <div class="chapter__cards cards">
                 {{ range .MostRecent }}
-                <div class="cards__small-card small-card">
+                <a href="/pages/post{{ .PostId }}.html" class="cards__small-card small-card">
                     <img class="small-card__img" src="{{ .ImgPost }}" alt="{{ .Title }}">
                     <h3 class="small-card__title">{{ .Title }}</h3>
                     <p class="small-card__description">{{ .Subtitle }}</p>
@@ -69,7 +70,7 @@
                         <span class="about-block__name">{{ .Author }}</span>
                         <span class="about-block__date">{{ .PostDate }}</span>
                     </div>
-                </div>
+                </a>
                 {{ end }}
             </div>
         </section>
