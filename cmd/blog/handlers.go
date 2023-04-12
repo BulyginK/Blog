@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"html/template"
 	"log"
 	"net/http"
@@ -137,6 +138,16 @@ func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		id, err := strconv.Atoi(r.URL.Query().Get("post_id"))
 		if err != nil || id < 1 {
 			http.Error(w, "Internal Server Error", 500)
+			return
+		}
+
+		s, err := app.snippets.Get(id)
+		if err != nil {
+			if errors.Is(err, models.ErrNoRecord) {
+				app.notFound(w)
+			} else {
+				app.serverError(w, err)
+			}
 			return
 		}
 
