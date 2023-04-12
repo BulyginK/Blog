@@ -11,6 +11,7 @@ import (
 type indexPageData struct {
 	FeaturedPosts []featuredPostData
 	MostRecent    []mostRecentData
+	//новье
 }
 
 type featuredPostData struct {
