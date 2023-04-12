@@ -11,7 +11,7 @@ import (
 type indexPageData struct {
 	FeaturedPosts []featuredPostData
 	MostRecent    []mostRecentData
-	// PostDate      time.Time `db:"date_new"`
+	//новье
 }
 
 type featuredPostData struct {
