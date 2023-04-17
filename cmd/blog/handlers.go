@@ -141,7 +141,7 @@ func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		s, err := app.snippets.Get(id)
+		s, err := db.snippets.Get(id)
 		if err != nil {
 			if errors.Is(err, models.ErrNoRecord) {
 				app.notFound(w)
