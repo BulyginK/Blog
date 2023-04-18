@@ -31,6 +31,7 @@ type featuredPostData struct {
 	Author   string `db:"author"`
 	Avatar   string `db:"author_ur"`
 	PostDate string `db:"publish_date"`
+	PostURL  string
 }
 
 type mostRecentData struct {
@@ -41,6 +42,7 @@ type mostRecentData struct {
 	Author   string `db:"author"`
 	Avatar   string `db:"author_ur"`
 	PostDate string `db:"publish_date"`
+	PostURL  string
 }
 
 func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
