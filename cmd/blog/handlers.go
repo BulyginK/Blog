@@ -1,21 +1,23 @@
 package main
 
 import (
-	"errors"
+	"database/sql"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"strconv"
 
+	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
 )
 
 type indexPageData struct {
-	FeaturedPosts []featuredPostData
-	MostRecent    []mostRecentData
+	FeaturedPosts []*featuredPostData
+	MostRecent    []*mostRecentData
 }
 
-type postPageData struct {
+type postData struct {
 	Title    string `db:"title"`
 	Subtitle string `db:"subtitle"`
 	ImgPost  string `db:"bigimage_url"`
@@ -84,7 +86,51 @@ func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func featuredPosts(db *sqlx.DB) ([]featuredPostData, error) {
+func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		postIDStr := mux.Vars(r)["postID"] // Получаем orderID в виде строки из параметров урла
+
+		postID, err := strconv.Atoi(postIDStr) // Конвертируем строку orderID в число
+		if err != nil {
+			http.Error(w, "Invalid post id", 403)
+			log.Println(err)
+			return
+		}
+
+		post, err := postByID(db, postID)
+		if err != nil {
+			if err == sql.ErrNoRows {
+				// sql.ErrNoRows возвращается, когда в запросе к базе не было ничего найдено
+				// В таком случае мы возвращем 404 (not found) и пишем в тело, что ордер не найден
+				http.Error(w, "Post not found", 404)
+				log.Println(err)
+				return
+			}
+
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		ts, err := template.ParseFiles("pages/post.html")
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		err = ts.Execute(w, post)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		log.Println("Request completed successfully")
+	}
+}
+
+func featuredPosts(db *sqlx.DB) ([]*featuredPostData, error) {
 	const query = `
 		SELECT
 		  post_id,
@@ -100,17 +146,23 @@ func featuredPosts(db *sqlx.DB) ([]featuredPostData, error) {
 		WHERE featured = 1
 	`
 
-	var posts []featuredPostData
+	var posts []*featuredPostData
 
 	err := db.Select(&posts, query)
 	if err != nil {
 		return nil, err
 	}
 
+	for _, post := range posts {
+		post.PostURL = "/post/" + post.PostId // Формируем исходя из ID поста в базе
+	}
+
+	fmt.Println(posts)
+
 	return posts, nil
 }
 
-func mostRecentPosts(db *sqlx.DB) ([]mostRecentData, error) {
+func mostRecentPosts(db *sqlx.DB) ([]*mostRecentData, error) {
 	const query = `
 		SELECT
 		  post_id,
@@ -125,64 +177,24 @@ func mostRecentPosts(db *sqlx.DB) ([]mostRecentData, error) {
 		WHERE featured = 0
 	`
 
-	var posts []mostRecentData
+	var posts []*mostRecentData
 
 	err := db.Select(&posts, query)
 	if err != nil {
 		return nil, err
 	}
 
+	for _, post := range posts {
+		post.PostURL = "/post/" + post.PostId // Формируем исходя из ID поста в базе
+	}
+
+	fmt.Println(posts)
+
 	return posts, nil
 }
 
-func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		id, err := strconv.Atoi(r.URL.Query().Get("post_id"))
-		if err != nil || id < 1 {
-			http.Error(w, "Internal Server Error", 500)
-			return
-		}
-
-		s, err := db.snippets.Get(id)
-		if err != nil {
-			if errors.Is(err, models.ErrNoRecord) {
-				app.notFound(w)
-			} else {
-				app.serverError(w, err)
-			}
-			return
-		}
-
-		postPageData, err := postPage(db)
-		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
-			log.Println(err)
-			return
-		}
-
-		ts, err := template.ParseFiles("pages/post.html")
-		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
-			log.Println(err)
-			return
-		}
-
-		data := post{
-			PagePost: postPageData,
-		}
-
-		err = ts.Execute(w, data) // Заставляем шаблонизатор вывести шаблон в тело ответа
-		if err != nil {
-			http.Error(w, "Internal Server Error", 500)
-			log.Println(err)
-			return
-		}
-
-		log.Println("Request completed successfully")
-	}
-}
-
-func postPage(db *sqlx.DB) ([]postPageData, error) {
+// Получает информацию о конкретном посте из базы данных
+func postByID(db *sqlx.DB, postID int) (postData, error) {
 	const query = `
 		SELECT
 			title,
@@ -190,15 +202,18 @@ func postPage(db *sqlx.DB) ([]postPageData, error) {
 			bigimage_url,
 			post_text
 		FROM
-			post
-		AND id = ?	
+			` + "`post`" +
+		`WHERE
+			post_id = ?
 	`
+	// В SQL-запросе добавились параметры, как в шаблоне. ? означает параметр, который мы передаем в запрос ниже
 
-	var post []postPageData
+	var post postData
 
-	err := db.Get(&post, query)
+	// Обязательно нужно передать в параметрах orderID
+	err := db.Get(&post, query, postID)
 	if err != nil {
-		return nil, err
+		return postData{}, err
 	}
 
 	return post, nil
