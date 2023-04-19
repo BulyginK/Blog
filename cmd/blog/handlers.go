@@ -88,9 +88,9 @@ func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		postIDStr := mux.Vars(r)["postID"] // Получаем orderID в виде строки из параметров урла
+		postIDStr := mux.Vars(r)["postID"] // Получаем postID в виде строки из параметров урла
 
-		postID, err := strconv.Atoi(postIDStr) // Конвертируем строку orderID в число
+		postID, err := strconv.Atoi(postIDStr) // Конвертируем строку postID в число
 		if err != nil {
 			http.Error(w, "Invalid post id", 403)
 			log.Println(err)
@@ -210,7 +210,7 @@ func postByID(db *sqlx.DB, postID int) (postData, error) {
 
 	var post postData
 
-	// Обязательно нужно передать в параметрах orderID
+	// Обязательно нужно передать в параметрах postID
 	err := db.Get(&post, query, postID)
 	if err != nil {
 		return postData{}, err

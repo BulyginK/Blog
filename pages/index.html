@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/pages/main.js" defer></script>
 </head>
 
 <body>
@@ -41,7 +40,7 @@
             <h2 class="chapter__title">Featured Posts</h2>
             <div class="chapter__cards cards">
                 {{ range .FeaturedPosts }}
-                <a href="/pages/post/{{ .PostURL }}.html" class="cards__big-card big-card"
+                <a href="{{ .PostURL }}" class="cards__big-card big-card"
                     style="background: url({{.ImgPost}}); background-size: 100% 100%">
                     {{ if .Label }}
                     <span class="big-card__icon">{{ .Label }}</span>
@@ -61,7 +60,7 @@
             <h2 class="chapter__title">Most Recent</h2>
             <div class="chapter__cards cards">
                 {{ range .MostRecent }}
-                <a href="/pages/post/{{ .PostURL }}.html" class="cards__small-card small-card">
+                <a href="{{ .PostURL }}" class="cards__small-card small-card">
                     <img class="small-card__img" src="{{ .ImgPost }}" alt="{{ .Title }}">
                     <h3 class="small-card__title">{{ .Title }}</h3>
                     <p class="small-card__description">{{ .Subtitle }}</p>
