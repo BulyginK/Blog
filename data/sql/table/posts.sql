@@ -4,12 +4,11 @@ CREATE TABLE post
    `title`           VARCHAR(255) NOT NULL,
    `subtitle`        VARCHAR(255) NOT NULL,
    `image_url`       VARCHAR(255) NOT NULL,
-   `bigimage_url`    VARCHAR(255) NOT NULL,
    `label`           VARCHAR(255) NOT NULL,
    `author`          VARCHAR(255) NOT NULL,
    `author_ur`       VARCHAR(255) NOT NULL,
    `publish_date`    VARCHAR(255) NOT NULL,
-   `post_text`       TEXT NOT NULL,
+   `content`         TEXT NOT NULL,
    `featured`        TINYINT(1) DEFAULT 0,
    PRIMARY KEY (`post_id`)
 ) ENGINE = InnoDB

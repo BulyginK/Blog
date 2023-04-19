@@ -20,8 +20,8 @@ type indexPageData struct {
 type postData struct {
 	Title    string `db:"title"`
 	Subtitle string `db:"subtitle"`
-	ImgPost  string `db:"bigimage_url"`
-	PostText string `db:"post_text"`
+	ImgPost  string `db:"image_url"`
+	PostText string `db:"content"`
 }
 
 type featuredPostData struct {
@@ -199,11 +199,11 @@ func postByID(db *sqlx.DB, postID int) (postData, error) {
 		SELECT
 			title,
 			subtitle,
-			bigimage_url,
-			post_text
+			image_url,
+			content
 		FROM
-			` + "`post`" +
-		`WHERE
+			` + "`post`" + `
+		WHERE
 			post_id = ?
 	`
 	// В SQL-запросе добавились параметры, как в шаблоне. ? означает параметр, который мы передаем в запрос ниже
