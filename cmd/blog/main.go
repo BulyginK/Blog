@@ -28,7 +28,7 @@ func main() {
 
 	mux.HandleFunc("/post/{postID}", post(dbx))
 
-	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
+	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	log.Println("Start server " + port)
 	err = http.ListenAndServe(port, mux)
