@@ -10,12 +10,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="main.js" defer></script>
+
 </head>
 
 <body>
     <header class="header">
         <div class="header__nav nav-menu">
-            <img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo">
+            <a href=""><img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo"></a>
             <nav class="nav-menu__nav-items nav-items">
                 <a class="nav-items__item nav-items__item-color-white" href="#">Home</a>
                 <a class="nav-items__item nav-items__item-color-white" href="#">Categories</a>
@@ -75,7 +77,7 @@
         </section>
     </main>
     <footer class="footer">
-        <form class="footer__form form" action="#" method="get">
+        <form name="send_email" class="footer__form form" action="#" method="get">
             <h3 class="form__title">Stay in Touch</h3>
             <div class="form__email-form email-form">
                 <input class="email-form__input" type="email" name="email" id="email"
@@ -85,7 +87,7 @@
         </form>
         <div class="footer__nav-menu">
             <div class="nav-menu">
-                <img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo">
+                <a href=""><img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo"></a>
                 <nav class="nav-menu__nav-items nav-items">
                     <a class="nav-items__item nav-items__item-color-gray" href="#">Home</a>
                     <a class="nav-items__item nav-items__item-color-gray" href="#">Categories</a>

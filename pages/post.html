@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
+    <title>{{ .Title }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
 <body>
     <header class="header">
         <div class="header__header-nav header-nav">
-            <img src="/static/img/Escape_black.svg" alt="Logo">
+            <a href="/home"><img src="/static/img/Escape_black.svg" alt="Logo"></a>
             <nav class="header-nav__header-menu header-menu">
                 <a class="header-menu__nav-item" href="/home">Home</a>
                 <a class="header-menu__nav-item" href="#">Categories</a>
@@ -43,7 +43,7 @@
         </form>
         <div class="footer__nav-menu">
             <div class="nav-menu">
-                <img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo">
+                <a href="/home"><img class="nav-menu__logo" src="/static/img/Escape.svg" alt="Logo"></a>
                 <nav class="nav-menu__nav-items nav-items">
                     <a class="nav-items__item nav-items__item-color-gray" href="/home">Home</a>
                     <a class="nav-items__item nav-items__item-color-gray" href="#">Categories</a>

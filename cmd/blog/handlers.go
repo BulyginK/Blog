@@ -75,7 +75,7 @@ func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			MostRecent:    postsMostRecent,
 		}
 
-		err = ts.Execute(w, data) // Заставляем шаблонизатор вывести шаблон в тело ответа
+		err = ts.Execute(w, data)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
 			log.Println(err)
@@ -88,9 +88,9 @@ func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		postIDStr := mux.Vars(r)["postID"] // Получаем postID в виде строки из параметров урла
+		postIDStr := mux.Vars(r)["postID"]
 
-		postID, err := strconv.Atoi(postIDStr) // Конвертируем строку postID в число
+		postID, err := strconv.Atoi(postIDStr)
 		if err != nil {
 			http.Error(w, "Invalid post id", 403)
 			log.Println(err)
@@ -100,8 +100,6 @@ func post(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 		post, err := postByID(db, postID)
 		if err != nil {
 			if err == sql.ErrNoRows {
-				// sql.ErrNoRows возвращается, когда в запросе к базе не было ничего найдено
-				// В таком случае мы возвращем 404 (not found) и пишем в тело, что ордер не найден
 				http.Error(w, "Post not found", 404)
 				log.Println(err)
 				return
@@ -154,7 +152,7 @@ func featuredPosts(db *sqlx.DB) ([]*featuredPostData, error) {
 	}
 
 	for _, post := range posts {
-		post.PostURL = "/post/" + post.PostId // Формируем исходя из ID поста в базе
+		post.PostURL = "/post/" + post.PostId
 	}
 
 	fmt.Println(posts)
@@ -185,7 +183,7 @@ func mostRecentPosts(db *sqlx.DB) ([]*mostRecentData, error) {
 	}
 
 	for _, post := range posts {
-		post.PostURL = "/post/" + post.PostId // Формируем исходя из ID поста в базе
+		post.PostURL = "/post/" + post.PostId
 	}
 
 	fmt.Println(posts)
@@ -193,7 +191,6 @@ func mostRecentPosts(db *sqlx.DB) ([]*mostRecentData, error) {
 	return posts, nil
 }
 
-// Получает информацию о конкретном посте из базы данных
 func postByID(db *sqlx.DB, postID int) (postData, error) {
 	const query = `
 		SELECT
@@ -206,11 +203,9 @@ func postByID(db *sqlx.DB, postID int) (postData, error) {
 		WHERE
 			post_id = ?
 	`
-	// В SQL-запросе добавились параметры, как в шаблоне. ? означает параметр, который мы передаем в запрос ниже
 
 	var post postData
 
-	// Обязательно нужно передать в параметрах postID
 	err := db.Get(&post, query, postID)
 	if err != nil {
 		return postData{}, err
