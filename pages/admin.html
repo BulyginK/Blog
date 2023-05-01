@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In</title>
+    <title>New post</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
@@ -13,23 +13,69 @@
 </head>
 
 <body>
-    <main class="wrapper">
-        <div class="admin">
-            <div class="admin__title-block title-block">
-                <h1 class="title-block__title">Escape.<span class="title-block__title-interlinear">author</span></h1>
-                <span class="title-block__subtitle">Log in to start creating</span>
-            </div>
-            <form class="admin-wrapper__login-block login-block">
-                <h2 class="login-block__title">Log In</h2>
-                <label class="login-block__email-label" for="email">Email</label>
-                <input class="login-block__email-form" type="email" name="email" id="email" placeholder="" required>
-                <label class="login-block__password-label" for="password">Password</label>
-                <input class="login-block__password-form" type="password" name="password" id="password" placeholder=""
-                    required>
-                <img class="login-block__password-eye-img" src="/static/img/eye.svg" alt="eye-img">
-                <button class="login-block__button" type="submit">Log In</button>
-            </form>
+    <header class="header">
+        <div class="menu">
+            <img class="menu__logo" src="/static/img/LogoInversed.svg" alt="Logo">
+            <span class="menu__avatar">N</span>
+            <img class="menu__log-out" src="/static/img/log-out.svg" alt="log out">
         </div>
+    </header>
+    <main class="main">
+        <div class="main__main-top main-top">
+            <div>
+                <h1 class="main-top__title">New Post</h1>
+                <p class="main-top__subtitle">Fill out the form bellow and publish your article</p>
+            </div>
+            <button class="main-top__publ-button">Publish</button>
+        </div>
+        <form class="main__form form" action="#">
+            <div class="form__form-block form-block">
+                <h2 class="form-block__title">Main Information</h2>
+                <div class="form-block__form-wrapper form-wrapper">
+                    <div class="form-wrapper__form-data form-data">
+                        <label class="form-data__label" for="post-title">Title</label>
+                        <input class="form-data__post-info" type="text" id="post-title" placeholder="New Post">
+                        <label class="form-data__label" for="post-subtitle">Short description</label>
+                        <input class="form-data__post-info" type="text" id="post-subtitle"
+                            placeholder="Please, enter any description">
+                        <label class="form-data__label" for="author-name">Author name</label>
+                        <input class="form-data__author-name" type="text" id="author-name">
+                        <span class="form-data__label" for="author-photo">Author Photo</span>
+                        <img class="form-data__img-camera" src="/static/img/camera.svg" alt="camera">
+                        <button class="form-data__author-photo">Upload</button>
+                        <label class="form-data__label" for="publish-date">Publish Date</label>
+                        <input class="form-data__publish-date" type="text" id="publish-date">
+                        <label class="form-data__label" for="">Hero Image</label>
+                        <input type="text">
+                        <span class="form-data__label form-data__label-light-gray">Size up to 10mb. Format: png, jpeg,
+                            gif.</span>
+                        <label class="form-data__label" for="">Hero Image</label>
+                        <input type="text">
+                        <span class="form-data__label form-data__label-light-gray">Size up to 5mb. Format: png, jpeg,
+                            gif.</span>
+                    </div>
+                    <div class="form-wrapper__form-preview form-preview">
+                        <span class="form-preview__preview-label">Article preview</span>
+                        <div>
+                            <div>
+
+                            </div>
+                        </div>
+                        <span class="form-preview__preview-label">Post card preview</span>
+                        <div>
+                            <div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form__form-block form-block">
+                <h2 class="form-block__title">Content</h2>
+                <label class="form-data__label" for="content">Post content (plain text)</label>
+                <input class="form-data__content" type="text" name="" id="content">
+            </div>
+        </form>
     </main>
 </body>
 

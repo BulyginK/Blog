@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  background: linear-gradient(0deg, rgba(66, 70, 73, 0.4), rgba(66, 70, 73, 0.4)), url(/static/img/trostnik_trava.jpg) no-repeat;
+  /* background-size: contain; */
+  /* width: 100%; */
+}
+
+.admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1180px;
+  height: 100vh;
+  padding: 0 130px;
+  /* margin: 0 auto; */
+}
+
+.title-block {
+  box-sizing: border-box;
+  width: 480px;
+  padding-left: 100px;
+}
+
+.title-block__title {
+  font: 45.5px/46px 'Lora', sans-serif;
+  color: #FFFFFF;
+  padding-bottom: 16px;
+}
+
+.title-block__title-interlinear {
+  font: 24.5px/31px 'Oxygen', sans-serif;
+  color: #FFFFFF;
+}
+
+.title-block__subtitle {
+  font: 17px/25px 'Oxygen', sans-serif;
+  color: #FFFFFF;
+}
+
+.login-block {
+  box-sizing: border-box;
+  width: 480px;
+  height: 560px;
+  padding: 56px 40px;
+  background: #FFFFFF;
+  border-radius: 3px;
+}
+
+.login-block__title {
+  font: 34px/40px 'Lora', sans-serif;
+}
