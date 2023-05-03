@@ -33,48 +33,60 @@
                 <h2 class="form-block__title">Main Information</h2>
                 <div class="form-block__form-wrapper form-wrapper">
                     <div class="form-wrapper__form-data form-data">
-                        <span class="form-data__label">Title</span>
-                        <input class="form-data__input" type="text" placeholder="New Post">
-                        <span class="form-data__label">Short description</span>
+                        <label class="form-data__label">Title</label>
+                        <input class="form-data__input" type="text" placeholder="Please, enter any title post">
+                        <label class="form-data__label">Short description</label>
                         <input class="form-data__input" type="text" placeholder="Please, enter any description">
-                        <span class="form-data__label">Author name</span>
+                        <label class="form-data__label">Author name</label>
                         <input class="form-data__input form-data__input-without-border" type="text">
-                        <span class="form-data__label">Author Photo</span>
-                        <div class="form-data__author-photo author-photo">
+                        <label class="form-data__label">Author Photo</label>
+                        <div class="form-data__author-photo">
                             <input class="form-data__input-hidden" type="file" id="author_photo">
-                            <label class="wrapper" for="author_photo">
-                                <img class="author-photo__img-camera" src="/static/img/camera.svg">
+                            <label for="author_photo">
+                                <div class="form-data__img-camera img-camera-border">
+                                    <img src="/static/img/camera.svg" alt="camera">
+                                </div>
                             </label>
                             <label for="author_photo">
-                                <span class="author__up-author-photo">Upload</span>
+                                <span class="form-data__upload-link form-data__upload-link-lpadding-16">Upload</span>
                             </label>
                         </div>
-                        
-                        <label class="form-data__label" for="publish-date">Publish Date</label>
-                        <input class="form-data__input" type="date" id="publish-date" value="2024-04-18">
-                        <label class="form-data__label" for="">Hero Image</label>
-                        <div class="form-data__input-big-img">
-                            <input class="author__img-camera" type="file">
-                            <img src="/static/img/camera.svg" alt="camera">
-                            <a class="author__up-author-photo" href="#">Upload</a>
+                        <label class="form-data__label">Publish Date</label>
+                        <input class="form-data__input " type="date" value="2023-05-03">
+                        <label class="form-data__label">Hero Image</label>
+                        <div class="form-data__big-img">
+                            <input class="form-data__input-hidden" type="file" id="big-img">
+                            <label for="big-img">
+                                <img src="/static/img/camera.svg" alt="camera">
+                            </label>
+                            <label for="big-img">
+                                <span class="form-data__upload-link form-data__upload-link-lpadding-8">Upload</span>
+                            </label>
                         </div>
-
                         <span class="form-data__label form-data__label-light-gray">Size up to 10mb. Format: png, jpeg,
                             gif.</span>
-                        <label class="form-data__label" for="">Hero Image</label>
-                        <input class="form-data__input-small-img" type="text">
+                        <label class="form-data__label">Hero Image</label>
+                        <div class="form-data__small-img">
+                            <input class="form-data__input-hidden" type="file" id="small-img">
+                            <label for="small-img">
+                                <img src="/static/img/camera.svg" alt="camera">
+                            </label>
+                            <label for="small-img">
+                                <span class="form-data__upload-link form-data__upload-link-lpadding-8">Upload</span>
+                            </label>
+                        </div>
                         <span class="form-data__label form-data__label-light-gray">Size up to 5mb. Format: png, jpeg,
                             gif.</span>
                     </div>
                     <div class="form-wrapper__form-preview form-preview">
                         <span class="form-preview__preview-label">Article preview</span>
-                        <div>
-                            <div>
+                        <div class="form-preview__article-frame">
+                            <div class="form-preview__article-in-frame">
 
                             </div>
                         </div>
                         <span class="form-preview__preview-label">Post card preview</span>
-                        <div>
+                        <div class="form-preview__preview-frame">
                             <div>
 
                             </div>
@@ -84,8 +96,9 @@
             </div>
             <div class="form__form-block form-block">
                 <h2 class="form-block__title">Content</h2>
-                <label class="form-data__label" for="content">Post content (plain text)</label>
-                <input class="form-data__content" type="text" name="" id="content">
+                <label class="form-data__label">Post content (plain text)</label>
+                <textarea class="form-data__content" name="" id="" cols="30" rows="10"
+                    placeholder="Type anything you want ..."></textarea>
             </div>
         </form>
     </main>
