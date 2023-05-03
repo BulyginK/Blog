@@ -33,24 +33,33 @@
                 <h2 class="form-block__title">Main Information</h2>
                 <div class="form-block__form-wrapper form-wrapper">
                     <div class="form-wrapper__form-data form-data">
-                        <label class="form-data__label" for="post-title">Title</label>
-                        <input class="form-data__input" type="text" id="post-title" placeholder="New Post">
-                        <label class="form-data__label" for="post-subtitle">Short description</label>
-                        <input class="form-data__input" type="text" id="post-subtitle"
-                            placeholder="Please, enter any description">
-                        <label class="form-data__label" for="author-name">Author name</label>
-                        <input class="form-data__input form-data__input-without-border" type="text" id="author-name">
-                        <span class="form-data__label" for="author-photo">Author Photo</span>
+                        <label class="form-data__label" for="post-title">Title
+                            <input class="form-data__input" type="text" id="post-title" placeholder="New Post">
+                        </label>
+                        <label class="form-data__label" for="post-subtitle">Short description
+                            <input class="form-data__input" type="text" id="post-subtitle"
+                                placeholder="Please, enter any description">
+                        </label>
+                        <label class="form-data__label" for="author-name">Author name
+                            <input class="form-data__input form-data__input-without-border" type="text"
+                                id="author-name">
+                        </label>
+
+                        <span class="form-data__label">Author Photo</span>
+
                         <div class="form-data__author author">
-                            <img class="author__img-camera" src="/static/img/camera.svg" alt="camera">
-                            <a class="author__up-author-photo" href="#">Upload</a>
+                            <input class="author__input" type="file" id="author-photo" multiple>
+                            <label for="author-photo">
+                                <span class="author__img-camera"></span>
+                                <span class="author__up-author-photo" href="#">Upload</span>
+                            </label>
                         </div>
                         <label class="form-data__label" for="publish-date">Publish Date</label>
                         <input class="form-data__input" type="date" id="publish-date" value="2024-04-18">
                         <label class="form-data__label" for="">Hero Image</label>
                         <div class="form-data__input-big-img">
-                            <input type="file">
-                            <img class="author__img-camera" src="/static/img/camera.svg" alt="camera">
+                            <input class="author__img-camera" type="file">
+                            <img src="/static/img/camera.svg" alt="camera">
                             <a class="author__up-author-photo" href="#">Upload</a>
                         </div>
 
