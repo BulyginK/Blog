@@ -34,23 +34,30 @@
                 <div class="form-block__form-wrapper form-wrapper">
                     <div class="form-wrapper__form-data form-data">
                         <label class="form-data__label" for="post-title">Title</label>
-                        <input class="form-data__post-info" type="text" id="post-title" placeholder="New Post">
+                        <input class="form-data__input" type="text" id="post-title" placeholder="New Post">
                         <label class="form-data__label" for="post-subtitle">Short description</label>
-                        <input class="form-data__post-info" type="text" id="post-subtitle"
+                        <input class="form-data__input" type="text" id="post-subtitle"
                             placeholder="Please, enter any description">
                         <label class="form-data__label" for="author-name">Author name</label>
-                        <input class="form-data__author-name" type="text" id="author-name">
+                        <input class="form-data__input form-data__input-without-border" type="text" id="author-name">
                         <span class="form-data__label" for="author-photo">Author Photo</span>
-                        <img class="form-data__img-camera" src="/static/img/camera.svg" alt="camera">
-                        <button class="form-data__author-photo">Upload</button>
+                        <div class="form-data__author author">
+                            <img class="author__img-camera" src="/static/img/camera.svg" alt="camera">
+                            <a class="author__up-author-photo" href="#">Upload</a>
+                        </div>
                         <label class="form-data__label" for="publish-date">Publish Date</label>
-                        <input class="form-data__publish-date" type="text" id="publish-date">
+                        <input class="form-data__input" type="date" id="publish-date" value="2024-04-18">
                         <label class="form-data__label" for="">Hero Image</label>
-                        <input type="text">
+                        <div class="form-data__input-big-img">
+                            <input type="file">
+                            <img class="author__img-camera" src="/static/img/camera.svg" alt="camera">
+                            <a class="author__up-author-photo" href="#">Upload</a>
+                        </div>
+
                         <span class="form-data__label form-data__label-light-gray">Size up to 10mb. Format: png, jpeg,
                             gif.</span>
                         <label class="form-data__label" for="">Hero Image</label>
-                        <input type="text">
+                        <input class="form-data__input-small-img" type="text">
                         <span class="form-data__label form-data__label-light-gray">Size up to 5mb. Format: png, jpeg,
                             gif.</span>
                     </div>
