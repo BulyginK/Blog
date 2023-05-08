@@ -4,7 +4,7 @@
 }
 
 .wrapper {
-  background: linear-gradient(0deg, rgba(66, 70, 73, 0.4), rgba(66, 70, 73, 0.4)), url(/static/img/trostnik_trava.jpg) no-repeat;
+  background: linear-gradient(0deg, rgba(66, 70, 73, 0.4), rgba(66, 70, 73, 0.4)), url(/static/img/trostnik_trava.jpeg) no-repeat;
   /* background-size: contain; */
   /* width: 100%; */
 }
