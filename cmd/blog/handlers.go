@@ -2,8 +2,10 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
 	"strconv"
@@ -45,6 +47,13 @@ type mostRecentData struct {
 	Avatar   string `db:"author_ur"`
 	PostDate string `db:"publish_date"`
 	PostURL  string
+}
+
+type createPostRequest struct {
+	Title    string `json:"title"`
+	Subtitle string `json:"subtitle"`
+	Author   string `json:"author"`
+	ImgPost  string `json:"image_url"`
 }
 
 func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
@@ -212,4 +221,75 @@ func postByID(db *sqlx.DB, postID int) (postData, error) {
 	}
 
 	return post, nil
+}
+
+func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		body, err := io.ReadAll(r.Body)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		var req createPostRequest
+		err = json.Unmarshal(body, &req)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		err = savePost(db, req)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		log.Println("Request completed successfully")
+	}
+}
+
+func admin() func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		ts, err := template.ParseFiles("pages/admin.html")
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		err = ts.Execute(w, nil)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		log.Println("Request completed successfully")
+	}
+}
+
+func savePost(db *sqlx.DB, req createPostRequest) error {
+	const query = `
+		INSERT INTO 
+		` + "`post`" + `	
+		(
+			title,
+			subtitle,
+			author,
+			image_url
+		)
+		VALUES
+		(
+			?,
+			?,
+			?,
+			?
+		)
+	`
+
+	_, err := db.Exec(query, req.Title, req.Subtitle, req.Author, req.ImgPost)
+	return err
 }

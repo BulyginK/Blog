@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/admin.css">
+    <script src="/src/createPost.js" defer></script>
+    <script src="/src/adminPage.js" defer></script>
 </head>
 
 <body>
@@ -20,13 +22,13 @@
             <img class="menu__log-out" src="/static/img/log-out.svg" alt="log out">
         </div>
     </header>
-    <main class="main">
+    <form class="main">
         <div class="main__main-top main-top">
             <div>
                 <h1 class="main-top__title">New Post</h1>
                 <p class="main-top__subtitle">Fill out the form bellow and publish your article</p>
             </div>
-            <button class="main-top__publ-button">Publish</button>
+            <button onclick="createPost()" class="main-top__publ-button">Publish</button>
         </div>
 
         <div style="display: none" class="main__message-section message-section">
@@ -42,26 +44,29 @@
             </div>
         </div>
 
-        <form class="main__form form" action="#">
+        <div class="main__form form" action="#">
             <div class="form__form-block form-block">
                 <h2 class="form-block__title">Main Information</h2>
                 <div class="form-block__form-wrapper form-wrapper">
                     <div class="form-wrapper__form-data form-data">
                         <label class="form-data__label">Title</label>
-                        <input class="form-data__input" type="text" placeholder="Please, enter any title post">
+                        <input class="form-data__input" name="title" type="text"
+                            placeholder="Please, enter any title post" required>
 
                         <label class="form-data__label">Short description</label>
-                        <input class="form-data__input" type="text" placeholder="Please, enter any description">
+                        <input class="form-data__input" name="subtitle" type="text"
+                            placeholder="Please, enter any description" required>
 
                         <label class="form-data__label">Author name</label>
-                        <input class="form-data__input form-data__input-without-border" type="text">
-                        <span style="display: none" class="form-data__author-required">Author name is required.</span>
+                        <input class="form-data__input form-data__input-without-border" name="author name" type="text"
+                            required>
+                        <span style="display: none;" class="form-data__author-required">Author name is required.</span>
 
                         <label class="form-data__label">Author Photo</label>
                         <div class="form-data__author-photo author-photo">
                             <input class="form-data__input-hidden" type="file" id="author_photo">
                             <span class="form-data__img-camera img-camera-border">
-                                <img src="/static/img/camera.svg" alt="Camera">
+                                <img src="/static/img/camera.svg" id="img-author" alt="Camera">
                             </span>
                             <label class="form-data__upload-link" for="author_photo">Upload</label>
                             <div style="display: none" class="form-data__new-remove-block">
@@ -127,8 +132,10 @@
                                         <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
                                     </svg>
                                 </div>
-                                <p class="article-preview__title">Please, enter any title post</p>
-                                <p class="article-preview__subtitle">Please, enter any description</p>
+                                <p class="article-preview__title">Please, enter any
+                                    title post</p>
+                                <p class="article-preview__subtitle article-preview__subtitle-color-dark">Please, enter
+                                    any description</p>
                                 <span class="article-preview__img-post"></span>
                             </div>
                             <span class="article-frame__fade-right"></span>
@@ -139,11 +146,14 @@
                             <div class="post-frame__post-preview post-preview">
                                 <div class="post-preview__img-post"></div>
                                 <div class="post-preview__post-info post-info">
-                                    <p class="post-info__preview-title">Please, enter any title post</p>
+                                    <p class="post-info__preview-title">Please, enter
+                                        any title post</p>
                                     <p class="post-info__preview-subtitle">Please, enter any description</p>
                                 </div>
                                 <div class="post-preview__author-preview author-preview">
-                                    <div class="author-preview__author-photo"></div>
+                                    <div class="author-preview__author-photo">
+                                        <img src="" id="img-author-preview" alt="">
+                                    </div>
                                     <span class="author-preview__author-name">Enter author name</span>
                                     <span class="author-preview__post-date">4/19/2023</span>
                                 </div>
@@ -160,8 +170,8 @@
                 <textarea class="form-data__content" name="" id="" cols="30" rows="10"
                     placeholder="Type anything you want ..."></textarea>
             </div>
-        </form>
-    </main>
+        </div>
+    </form>
 </body>
 
 </html>
