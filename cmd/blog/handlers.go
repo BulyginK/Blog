@@ -53,7 +53,6 @@ type createPostRequest struct {
 	Title    string `json:"title"`
 	Subtitle string `json:"subtitle"`
 	Author   string `json:"author"`
-	ImgPost  string `json:"image_url"`
 }
 
 func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
@@ -225,6 +224,8 @@ func postByID(db *sqlx.DB, postID int) (postData, error) {
 
 func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		log.Println("Request completed successfully")
+
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
@@ -274,22 +275,20 @@ func admin() func(w http.ResponseWriter, r *http.Request) {
 func savePost(db *sqlx.DB, req createPostRequest) error {
 	const query = `
 		INSERT INTO 
-		` + "`post`" + `	
+		  post	
 		(
 			title,
 			subtitle,
-			author,
-			image_url
+			author
 		)
 		VALUES
 		(
 			?,
 			?,
-			?,
 			?
 		)
 	`
-
-	_, err := db.Exec(query, req.Title, req.Subtitle, req.Author, req.ImgPost)
+	log.Println("Request completed successfully")
+	_, err := db.Exec(query, req.Title, req.Subtitle, req.Author)
 	return err
 }

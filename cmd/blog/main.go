@@ -28,7 +28,7 @@ func main() {
 
 	mux.HandleFunc("/post/{postID}", post(dbx))
 
-	// mux.HandleFunc("/post", createPost(dbx)).Methods(http.MethodPost)
+	mux.HandleFunc("/publish", createPost(dbx)).Methods(http.MethodPost)
 	mux.HandleFunc("/admin", admin())
 
 	mux.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))

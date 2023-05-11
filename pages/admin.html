@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/admin.css">
-    <script src="/src/createPost.js" defer></script>
+    <!-- <script src="/src/createPost.js" defer></script> -->
     <script src="/src/adminPage.js" defer></script>
 </head>
 
@@ -19,6 +19,7 @@
         <div class="menu">
             <img class="menu__logo" src="/static/img/LogoInversed.svg" alt="Logo">
             <span class="menu__avatar">N</span>
+            <img style="display: none" class="avatar" id="menu__avatar" src="" alt="menu avatar">
             <img class="menu__log-out" src="/static/img/log-out.svg" alt="log out">
         </div>
     </header>
@@ -28,10 +29,19 @@
                 <h1 class="main-top__title">New Post</h1>
                 <p class="main-top__subtitle">Fill out the form bellow and publish your article</p>
             </div>
-            <button onclick="createPost()" class="main-top__publ-button">Publish</button>
+            <button class="main-top__publ-button">Publish</button>
         </div>
 
-        <div style="display: none" class="main__message-section message-section">
+        <div style="display: none" class="show-message__alert">
+            <img src="/static/img/alert.svg" alt="Alert">
+            <span class="alert__label">Whoops! Some fields need your attention :o</span>
+        </div>
+        <div style="display: none" class="show-message__publish">
+            <img src="/static/img/check.svg" alt="Check">
+            <span class="publish__label">Publish Complete!</span>
+        </div>
+
+        <!-- <div class="main__message-section message-section">
             <div class="message-section__show-message show-message">
                 <div class="show-message__alert">
                     <img src="/static/img/alert.svg" alt="Alert">
@@ -42,7 +52,7 @@
                     <span class="publish__label">Publish Complete!</span>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="main__form form" action="#">
             <div class="form__form-block form-block">
@@ -66,8 +76,9 @@
                         <div class="form-data__author-photo author-photo">
                             <input class="form-data__input-hidden" type="file" id="author_photo">
                             <span class="form-data__img-camera img-camera-border">
-                                <img src="/static/img/camera.svg" id="img-author" alt="Camera">
+                                <img src="/static/img/camera.svg" alt="Camera">
                             </span>
+                            <img style="display: none" src="" id="img-author" alt="Camera">
                             <label class="form-data__upload-link" for="author_photo">Upload</label>
                             <div style="display: none" class="form-data__new-remove-block">
                                 <img src="/static/img/camera.svg" alt="Camera">
@@ -78,7 +89,7 @@
                         </div>
 
                         <label class="form-data__label">Publish Date</label>
-                        <input class="form-data__input " type="date" value="2023-05-03">
+                        <input class="form-data__input " type="date">
 
                         <!-- big-img -->
                         <label class="form-data__label">Hero Image</label>
