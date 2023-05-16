@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputTitle = form.querySelector('[name="title"]');
   const inputSubtitle = form.querySelector('[name="subtitle"]');
   const inputAuthorName = form.querySelector('[name="author name"]');
+  const titleNoName = form.querySelector('.form-data__title-required');
+  const descriptionNoName = form.querySelector('.form-data__description-required');
   const authorNoName = form.querySelector('.form-data__author-required');
 
   const authorPhotoElems = form.querySelector('.form-data__author-photo');
@@ -54,6 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
       titlePostCardPreview.textContent = defaultTitle;
       titleArticlePreview.classList.remove(classDarkTitle);
       titlePostCardPreview.classList.remove(classDarkTitle);
+      titleNoName.style.display = 'block';
+    } else {
+      titleNoName.style.display = 'none';
     }
   })
 
@@ -64,6 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (inputSubtitle.value == "") {
       subtitleArticlePreview.textContent = defaultSubtitle;
       subtitlePostCardPreview.textContent = defaultSubtitle;
+      descriptionNoName.style.display = 'block';
+    } else {
+      descriptionNoName.style.display = 'none';
     }
   })
 
@@ -173,6 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     } else {
       messageAlert.style.display = "flex";
+      titleNoName.style.display = 'block';
+      descriptionNoName.style.display = 'block';
       authorNoName.style.display = 'block';
 
       setTimeout(() => messageAlert.style.display = "none", 2500);
