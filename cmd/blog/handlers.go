@@ -272,6 +272,26 @@ func admin() func(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func login() func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		ts, err := template.ParseFiles("pages/login.html")
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		err = ts.Execute(w, nil)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		log.Println("Request completed successfully")
+	}
+}
+
 func savePost(db *sqlx.DB, req createPostRequest) error {
 	const query = `
 		INSERT INTO 

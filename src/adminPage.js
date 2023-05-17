@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputTitle = form.querySelector('[name="title"]');
   const inputSubtitle = form.querySelector('[name="subtitle"]');
   const inputAuthorName = form.querySelector('[name="author name"]');
-  const titleNoName = form.querySelector('.form-data__title-required');
+
   const subtitleNoName = form.querySelector('.form-data__description-required');
   const authorNoName = form.querySelector('.form-data__author-required');
 
@@ -33,24 +33,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputSmallImg = smallImgElems.querySelector('#small-img');
   const smallImg = bigImgElems.querySelector('img');
 
-  const titleArticlePreview = form.querySelector('.article-preview__title');
-  const titlePostCardPreview = form.querySelector('.post-info__preview-title');
+
   const subtitleArticlePreview = form.querySelector('.article-preview__subtitle');
   const subtitlePostCardPreview = form.querySelector('.post-info__preview-subtitle');
   const authorInPreview = form.querySelector('.author-preview__author-name');
   const imgAuthorPreview = form.querySelector('#img-author-preview');
   const bigImgPreview = form.querySelector('.article-preview__img-post');
+  const imgPreview = form.querySelector('.article-preview__img');
+  const imgPostPreview = form.querySelector('.img-post__img');
 
   const defaultAvatar = titleArticlePreview.textContent;
-  const defaultTitle = titleArticlePreview.textContent;
+
   const defaultSubtitle = subtitleArticlePreview.textContent;
   const defaultAuthorName = authorInPreview.textContent;
 
-  const maxLengthTitle = 25;
+
   const maxLengthSubtitle = 40;
   const maxLengthAuthorName = 30;
 
-  const classDarkTitle = 'preview-title-color-dark';
+
   const classDarkSubtitle = 'article-preview__subtitle-color-dark';
   const classImgAuthor = 'form-data__img-author';
   const classImgAuthorPreview = 'author-preview__img-author';
@@ -58,6 +59,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const regularName = /^[а-яА-ЯЁёA-Za-z]+$/;
 
   inputTitle.addEventListener('input', () => {
+    const titleArticlePreview = form.querySelector('.article-preview__title');
+    const titlePostCardPreview = form.querySelector('.post-info__preview-title');
+    const titleNoName = form.querySelector('.form-data__title-required');
+    const maxLengthTitle = 25;
+    const defaultTitle = titleArticlePreview.textContent;
+    const classDarkTitle = 'preview-title-color-dark';
+
     titleArticlePreview.textContent = inputTitle.value.substr(0, maxLengthTitle);
     titlePostCardPreview.textContent = inputTitle.value.substr(0, maxLengthTitle);
 
@@ -155,7 +163,11 @@ document.addEventListener("DOMContentLoaded", () => {
     bigImgUploadLink.style.display = 'none';
     bigImg.src = URL.createObjectURL(inputBigImg.files[0]);
 
-    bigImgPreview.style.background = URL.createObjectURL(inputBigImg.files[0]);
+    bigImgPreview.style.display = 'none';
+    imgPreview.style.display = 'block';
+    imgPreview.src = URL.createObjectURL(inputBigImg.files[0]);
+    imgPostPreview.style.display = 'block';
+    imgPostPreview.src = URL.createObjectURL(inputBigImg.files[0]);
 
     provisionSizeBigImg.style.display = 'none';
     removeBigImg.style.display = 'flex';
@@ -197,7 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
       subtitle: inputSubtitle.value,
       author: inputAuthorName.value,
     }
-
     console.log('dataForm: ', dataForm);
 
     if (validate()) {
