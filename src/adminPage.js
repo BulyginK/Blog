@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputSubtitle = form.querySelector('[name="subtitle"]');
   const inputAuthorName = form.querySelector('[name="author name"]');
   const titleNoName = form.querySelector('.form-data__title-required');
-  const descriptionNoName = form.querySelector('.form-data__description-required');
+  const subtitleNoName = form.querySelector('.form-data__description-required');
   const authorNoName = form.querySelector('.form-data__author-required');
 
   const authorPhotoElems = form.querySelector('.form-data__author-photo');
@@ -20,6 +20,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const uploadLink = authorPhotoElems.querySelector('.form-data__upload-link');
   const removeLink = authorPhotoElems.querySelector('.form-data__new-remove-block');
   const removeButton = removeLink.querySelector('button');
+
+  const bigImgElems = removeLink.querySelector('.form-data__big-img');
+  const inputBigImg = bigImgElems.querySelector('#input-bigImg');
+  const bigImgCamera = bigImgElems.querySelector('[alt="camera"]');
+  const bigImgUploadLink = bigImgElems.querySelector('.form-data__upload-link');
+  const bigImg = bigImgElems.querySelector('#big-Img');
+
+  const smallImgElems = removeLink.querySelector('.form-data__small-img');
+  const inputSmallImg = smallImgElems.querySelector('#small-img');
+  const smallImg = bigImgElems.querySelector('img');
 
   const titleArticlePreview = form.querySelector('.article-preview__title');
   const titlePostCardPreview = form.querySelector('.post-info__preview-title');
@@ -69,9 +79,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (inputSubtitle.value == "") {
       subtitleArticlePreview.textContent = defaultSubtitle;
       subtitlePostCardPreview.textContent = defaultSubtitle;
-      descriptionNoName.style.display = 'block';
+      subtitleNoName.style.display = 'block';
     } else {
-      descriptionNoName.style.display = 'none';
+      subtitleNoName.style.display = 'none';
     }
   })
 
@@ -100,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
     uploadLink.style.display = 'flex';
     removeLink.style.display = 'none';
   }
-
 
   const removeForm = () => {
     titleArticlePreview.textContent = defaultTitle;
@@ -134,9 +143,26 @@ document.addEventListener("DOMContentLoaded", () => {
     removeAvatar()
   })
 
+  inputBigImg.addEventListener('change', () => {
+    bigImg.src = URL.createObjectURL(inputBigImg.files[0]);
+    bigImgCamera.style.display = 'none';
+    bigImgUploadLink.style.display = 'none';
+    bigImg.style.display = "block";
+  });
 
   const validate = () => {
     let success = true;
+
+    // let checkListInputs = {
+    //   checkTitle: inputTitle.value == "" ? 0 : 1,
+    //   checkSubtitle: inputSubtitle.value == "" ? 0 : 1,
+    //   checkAuthor: inputAuthorName.value == "" ? 0 : 1,
+    // }
+
+    // for (var key in checkListInputs) {
+    //   console.log(key, ': ', checkListInputs[key])
+    // }
+
     if (regularName.test(inputAuthorName.value)) {
       return success
     } else {
@@ -180,10 +206,20 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => messageAlert.style.display = "none", 2500);
         });
     } else {
+
       messageAlert.style.display = "flex";
-      titleNoName.style.display = 'block';
-      descriptionNoName.style.display = 'block';
-      authorNoName.style.display = 'block';
+      if (inputTitle.value == "") {
+        titleNoName.style.display = 'block';
+      };
+      if (inputSubtitle.value == "") {
+        subtitleNoName.style.display = 'block';
+      };
+      if (inputAuthorName.value == "") {
+        authorNoName.style.display = 'block';
+      }
+
+
+
 
       setTimeout(() => messageAlert.style.display = "none", 2500);
     }

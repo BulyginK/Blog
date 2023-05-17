@@ -62,12 +62,13 @@
                         <label class="form-data__label">Title</label>
                         <input class="form-data__input" name="title" type="text"
                             placeholder="Please, enter any title post" required>
-                        <span style="display: none;" class="form-data__title-required">Title is required.</span>    
+                        <span style="display: none;" class="form-data__title-required">Title is required.</span>
 
                         <label class="form-data__label">Short description</label>
                         <input class="form-data__input" name="subtitle" type="text"
                             placeholder="Please, enter any description" required>
-                        <span style="display: none;" class="form-data__description-required">Short description is required.</span>    
+                        <span style="display: none;" class="form-data__description-required">Short description is
+                            required.</span>
 
                         <label class="form-data__label">Author name</label>
                         <input class="form-data__input form-data__input-without-border" name="author name" type="text"
@@ -80,7 +81,7 @@
                             <span class="form-data__img-camera img-camera-border">
                                 <img src="/static/img/camera.svg" alt="Camera">
                             </span>
-                            <img style="display: none" src="" id="img-author" alt="Camera">
+                            <img style="display: none" src="" id="img-author" alt="Author">
                             <label class="form-data__upload-link" for="author_photo">Upload</label>
                             <div style="display: none" class="form-data__new-remove-block">
                                 <img src="/static/img/camera.svg" alt="Camera">
@@ -96,9 +97,10 @@
                         <!-- big-img -->
                         <label class="form-data__label">Hero Image</label>
                         <div class="form-data__big-img">
-                            <input class="form-data__input-hidden" type="file" id="big-img">
+                            <input class="form-data__input-hidden" type="file" id="input-bigImg">
                             <img src="/static/img/camera.svg" alt="camera">
                             <label class="form-data__upload-link" for="big-img">Upload</label>
+                            <img style="display: none" src="" id="big-img" alt="Author">
                         </div>
                         <span class="form-data__provision-size">Size up to 10mb. Format: png,
                             jpeg, gif.</span>
