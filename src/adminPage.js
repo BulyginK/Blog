@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const removeLink = authorPhotoElems.querySelector('.form-data__new-remove-block');
   const removeButton = removeLink.querySelector('button');
 
-  const bigImgElems = removeLink.querySelector('.form-data__big-img');
+  const bigImgElems = form.querySelector('.form-data__big-img');
   const inputBigImg = bigImgElems.querySelector('#input-bigImg');
   const bigImgCamera = bigImgElems.querySelector('[alt="camera"]');
   const bigImgUploadLink = bigImgElems.querySelector('.form-data__upload-link');
-  const bigImg = bigImgElems.querySelector('#big-Img');
+  const bigImg = bigImgElems.querySelector('#big-img');
 
-  const smallImgElems = removeLink.querySelector('.form-data__small-img');
+  const smallImgElems = form.querySelector('.form-data__small-img');
   const inputSmallImg = smallImgElems.querySelector('#small-img');
   const smallImg = bigImgElems.querySelector('img');
 
@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const subtitlePostCardPreview = form.querySelector('.post-info__preview-subtitle');
   const authorInPreview = form.querySelector('.author-preview__author-name');
   const imgAuthorPreview = form.querySelector('#img-author-preview');
+  const bigImgPreview = form.querySelector('.article-preview__img-post');
 
   const defaultAvatar = titleArticlePreview.textContent;
   const defaultTitle = titleArticlePreview.textContent;
@@ -124,10 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
   authorPhoto.addEventListener('change', () => {
     menuAvatar.style.display = 'none';
     imgAvatar.src = URL.createObjectURL(authorPhoto.files[0]);
-    imgAvatar.style.display = "block";
+    imgAvatar.style.display = 'block';
 
     imgCamera.style.display = 'none';
-    imgAuthor.style.display = "block";
+    imgAuthor.style.display = 'block';
     imgAuthor.src = URL.createObjectURL(authorPhoto.files[0]);
     imgAuthor.classList.add(classImgAuthor);
 
@@ -143,12 +144,18 @@ document.addEventListener("DOMContentLoaded", () => {
     removeAvatar()
   })
 
+
   inputBigImg.addEventListener('change', () => {
-    bigImg.src = URL.createObjectURL(inputBigImg.files[0]);
+    console.log('bigImg: ', bigImg);
+
+    bigImg.style.display = 'block';
     bigImgCamera.style.display = 'none';
     bigImgUploadLink.style.display = 'none';
-    bigImg.style.display = "block";
+    bigImg.src = URL.createObjectURL(inputBigImg.files[0]);
+
+    bigImgPreview.style.background = URL.createObjectURL(inputBigImg.files[0]);;
   });
+
 
   const validate = () => {
     let success = true;

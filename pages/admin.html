@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/admin.css">
-    <!-- <script src="/src/createPost.js" defer></script> -->
     <script src="/src/adminPage.js" defer></script>
 </head>
 
@@ -96,11 +95,11 @@
 
                         <!-- big-img -->
                         <label class="form-data__label">Hero Image</label>
-                        <div class="form-data__big-img">
+                        <div class="form-data__big-img big-img">
                             <input class="form-data__input-hidden" type="file" id="input-bigImg">
                             <img src="/static/img/camera.svg" alt="camera">
-                            <label class="form-data__upload-link" for="big-img">Upload</label>
-                            <img style="display: none" src="" id="big-img" alt="Author">
+                            <label class="form-data__upload-link" for="input-bigImg">Upload</label>
+                            <img style="display: none" class="big-img__img" src="" id="big-img" alt="Img">
                         </div>
                         <span class="form-data__provision-size">Size up to 10mb. Format: png,
                             jpeg, gif.</span>
