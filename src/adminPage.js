@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const smallImg = bigImgElems.querySelector('img');
 
 
-  const subtitleArticlePreview = form.querySelector('.article-preview__subtitle');
+
   const subtitlePostCardPreview = form.querySelector('.post-info__preview-subtitle');
   const authorInPreview = form.querySelector('.author-preview__author-name');
   const imgAuthorPreview = form.querySelector('#img-author-preview');
@@ -42,13 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const imgPreview = form.querySelector('.article-preview__img');
   const imgPostPreview = form.querySelector('.img-post__img');
 
-  const defaultAvatar = titleArticlePreview.textContent;
+  // const defaultAvatar = titleArticlePreview.textContent;
 
-  const defaultSubtitle = subtitleArticlePreview.textContent;
+
   const defaultAuthorName = authorInPreview.textContent;
 
 
-  const maxLengthSubtitle = 40;
+
   const maxLengthAuthorName = 30;
 
 
@@ -84,6 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
   inputSubtitle.addEventListener('input', () => {
+    const subtitleArticlePreview = form.querySelector('.article-preview__subtitle');
+    const maxLengthSubtitle = 40;
+    const defaultSubtitle = subtitleArticlePreview.textContent;
+
     subtitleArticlePreview.textContent = inputSubtitle.value.substr(0, maxLengthSubtitle);
     subtitlePostCardPreview.textContent = inputSubtitle.value.substr(0, maxLengthSubtitle);
 
