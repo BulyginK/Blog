@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const bigImgCamera = bigImgElems.querySelector('[alt="camera"]');
   const bigImgUploadLink = bigImgElems.querySelector('.form-data__upload-link');
   const bigImg = bigImgElems.querySelector('#big-img');
+  const provisionSizeBigImg = form.querySelector('.form-data__provision-size-big-img');
+  const removeBigImg = form.querySelector('.form-data__big-img-remove-block');
 
   const smallImgElems = form.querySelector('.form-data__small-img');
   const inputSmallImg = smallImgElems.querySelector('#small-img');
@@ -153,7 +155,10 @@ document.addEventListener("DOMContentLoaded", () => {
     bigImgUploadLink.style.display = 'none';
     bigImg.src = URL.createObjectURL(inputBigImg.files[0]);
 
-    bigImgPreview.style.background = URL.createObjectURL(inputBigImg.files[0]);;
+    bigImgPreview.style.background = URL.createObjectURL(inputBigImg.files[0]);
+
+    provisionSizeBigImg.style.display = 'none';
+    removeBigImg.style.display = 'flex';
   });
 
 
