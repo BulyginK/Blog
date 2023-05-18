@@ -10,9 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputSubtitle = form.querySelector('[name="subtitle"]');
   const inputAuthorName = form.querySelector('[name="author name"]');
 
-  const subtitleNoName = form.querySelector('.form-data__description-required');
-  const authorNoName = form.querySelector('.form-data__author-required');
-
   const authorPhotoElems = form.querySelector('.form-data__author-photo');
   const imgCamera = authorPhotoElems.querySelector('.form-data__img-camera')
   const authorPhoto = authorPhotoElems.querySelector('#author_photo');
@@ -33,38 +30,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputSmallImg = smallImgElems.querySelector('#small-img');
   const smallImg = bigImgElems.querySelector('img');
 
-
-
   const subtitlePostCardPreview = form.querySelector('.post-info__preview-subtitle');
-  const authorInPreview = form.querySelector('.author-preview__author-name');
+
   const imgAuthorPreview = form.querySelector('#img-author-preview');
   const bigImgPreview = form.querySelector('.article-preview__img-post');
   const imgPreview = form.querySelector('.article-preview__img');
   const imgPostPreview = form.querySelector('.img-post__img');
 
   // const defaultAvatar = titleArticlePreview.textContent;
-
-
-  const defaultAuthorName = authorInPreview.textContent;
-
-
-
-  const maxLengthAuthorName = 30;
-
-
   const classDarkSubtitle = 'article-preview__subtitle-color-dark';
   const classImgAuthor = 'form-data__img-author';
   const classImgAuthorPreview = 'author-preview__img-author';
 
   const regularName = /^[а-яА-ЯЁёA-Za-z]+$/;
 
+  const titleArticlePreview = form.querySelector('.article-preview__title');
+  const titlePostCardPreview = form.querySelector('.post-info__preview-title');
+  const titleNoName = form.querySelector('.form-data__title-required');
+  const maxLengthTitle = 25;
+  const defaultTitle = titleArticlePreview.textContent;
+  const classDarkTitle = 'preview-title-color-dark';
   inputTitle.addEventListener('input', () => {
-    const titleArticlePreview = form.querySelector('.article-preview__title');
-    const titlePostCardPreview = form.querySelector('.post-info__preview-title');
-    const titleNoName = form.querySelector('.form-data__title-required');
-    const maxLengthTitle = 25;
-    const defaultTitle = titleArticlePreview.textContent;
-    const classDarkTitle = 'preview-title-color-dark';
+
 
     titleArticlePreview.textContent = inputTitle.value.substr(0, maxLengthTitle);
     titlePostCardPreview.textContent = inputTitle.value.substr(0, maxLengthTitle);
@@ -83,11 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 
+  const subtitleArticlePreview = form.querySelector('.article-preview__subtitle');
+  const maxLengthSubtitle = 40;
+  const defaultSubtitle = subtitleArticlePreview.textContent;
+  const subtitleNoName = form.querySelector('.form-data__description-required');
   inputSubtitle.addEventListener('input', () => {
-    const subtitleArticlePreview = form.querySelector('.article-preview__subtitle');
-    const maxLengthSubtitle = 40;
-    const defaultSubtitle = subtitleArticlePreview.textContent;
-
     subtitleArticlePreview.textContent = inputSubtitle.value.substr(0, maxLengthSubtitle);
     subtitlePostCardPreview.textContent = inputSubtitle.value.substr(0, maxLengthSubtitle);
 
@@ -100,6 +87,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 
+
+  const authorInPreview = form.querySelector('.author-preview__author-name');
+  const maxLengthAuthorName = 30;
+  const defaultAuthorName = authorInPreview.textContent;
+  const authorNoName = form.querySelector('.form-data__author-required');
   inputAuthorName.addEventListener('input', () => {
     authorInPreview.textContent = inputAuthorName.value.substr(0, maxLengthAuthorName);
 
@@ -160,8 +152,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   inputBigImg.addEventListener('change', () => {
-    console.log('bigImg: ', bigImg);
-
     bigImg.style.display = 'block';
     bigImgCamera.style.display = 'none';
     bigImgUploadLink.style.display = 'none';
@@ -170,8 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
     bigImgPreview.style.display = 'none';
     imgPreview.style.display = 'block';
     imgPreview.src = URL.createObjectURL(inputBigImg.files[0]);
-    imgPostPreview.style.display = 'block';
-    imgPostPreview.src = URL.createObjectURL(inputBigImg.files[0]);
 
     provisionSizeBigImg.style.display = 'none';
     removeBigImg.style.display = 'flex';
@@ -180,16 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const validate = () => {
     let success = true;
-
-    // let checkListInputs = {
-    //   checkTitle: inputTitle.value == "" ? 0 : 1,
-    //   checkSubtitle: inputSubtitle.value == "" ? 0 : 1,
-    //   checkAuthor: inputAuthorName.value == "" ? 0 : 1,
-    // }
-
-    // for (var key in checkListInputs) {
-    //   console.log(key, ': ', checkListInputs[key])
-    // }
 
     if (regularName.test(inputAuthorName.value)) {
       return success
@@ -233,7 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(() => messageAlert.style.display = "none", 2500);
         });
     } else {
-
       messageAlert.style.display = "flex";
       if (inputTitle.value == "") {
         titleNoName.style.display = 'block';
@@ -244,9 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (inputAuthorName.value == "") {
         authorNoName.style.display = 'block';
       }
-
-
-
 
       setTimeout(() => messageAlert.style.display = "none", 2500);
     }
