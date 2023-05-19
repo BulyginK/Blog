@@ -76,13 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     checkValue: function () {
       let titleNoName = this.nextElementSibling;
 
-      if (this.value == "") {
-        titleNoName.style.display = 'block';
-      } else {
-        console.log('titleNoName: ', titleNoName);
-
-        titleNoName.style.diplay = 'none';
-      }
+      this.value == "" ? titleNoName.style.display = 'block' : titleNoName.style.diplay = 'none';
     },
   }
   appData.init();
