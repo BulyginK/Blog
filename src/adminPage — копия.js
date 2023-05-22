@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputSmallImg = smallImgElems.querySelector('#small-img');
   const smallImg = bigImgElems.querySelector('img');
 
-  
+
 
   const imgAuthorPreview = form.querySelector('#img-author-preview');
   const bigImgPreview = form.querySelector('.article-preview__img-post');
@@ -46,21 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  
+
   const authorInPreview = form.querySelector('.author-preview__author-name');
   const maxLengthAuthorName = 30;
   const defaultAuthorName = authorInPreview.textContent;
   const authorNoName = form.querySelector('.form-data__author-required');
-  inputAuthorName.addEventListener('input', () => {
-    authorInPreview.textContent = inputAuthorName.value.substr(0, maxLengthAuthorName);
 
-    if (inputAuthorName.value == "") {
-      authorInPreview.textContent = defaultAuthorName;
-      authorNoName.style.display = 'block';
-    } else {
-      authorNoName.style.display = 'none';
-    }
-  })
+
+
 
   const removeAvatar = () => {
     menuAvatar.style.display = 'flex';
@@ -87,42 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
     authorInPreview.textContent = defaultAuthorName;
   }
 
-  authorPhoto.addEventListener('change', () => {
-    menuAvatar.style.display = 'none';
-    imgAvatar.src = URL.createObjectURL(authorPhoto.files[0]);
-    imgAvatar.style.display = 'block';
-
-    imgCamera.style.display = 'none';
-    imgAuthor.style.display = 'block';
-    imgAuthor.src = URL.createObjectURL(authorPhoto.files[0]);
-    imgAuthor.classList.add(classImgAuthor);
-
-    imgAuthorPreview.src = URL.createObjectURL(authorPhoto.files[0]);
-    imgAuthorPreview.classList.add(classImgAuthorPreview);
-
-    uploadLink.style.display = 'none';
-    removeLink.style.display = 'flex';
-  })
-
   removeButton.addEventListener('click', (e) => {
     e.preventDefault()
     removeAvatar()
   })
-
-
-  inputBigImg.addEventListener('change', () => {
-    bigImg.style.display = 'block';
-    bigImgCamera.style.display = 'none';
-    bigImgUploadLink.style.display = 'none';
-    bigImg.src = URL.createObjectURL(inputBigImg.files[0]);
-
-    bigImgPreview.style.display = 'none';
-    imgPreview.style.display = 'block';
-    imgPreview.src = URL.createObjectURL(inputBigImg.files[0]);
-
-    provisionSizeBigImg.style.display = 'none';
-    removeBigImg.style.display = 'flex';
-  });
 
 
   const validate = () => {

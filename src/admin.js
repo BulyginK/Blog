@@ -2,6 +2,15 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector('form');
+  const menuAvatar = document.querySelector('.menu__avatar');
+  const imgAvatar = document.querySelector('#menu__avatar');
+  const messageAlert = document.querySelector('.show-message__alert');
+  const messagePublish = document.querySelector('.show-message__publish');
+  const buttonPublish = document.querySelector('.main-top__publ-button');
+
+  const inputTitle = form.querySelector('[name="title"]');
+  const inputSubtitle = form.querySelector('[name="subtitle"]');
+  const inputAuthorName = form.querySelector('[name="author"]');
 
   const appData = {
     title: '',
@@ -21,6 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     addListeners: function () {
       let selectFiles = form.querySelectorAll('.select');
       let inputValue = form.querySelectorAll('.input');
+
+      buttonPublish.addEventListener('click', this.sendData);
 
       for (let i = 0; i < selectFiles.length; i++) {
         selectFiles[i].addEventListener('change', this.previewFile);
@@ -77,8 +88,29 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     },
     readerOnloadend: function (img, reader, file) {
+      const imgPreview = form.querySelector('.article-preview__img');
+      const bigImgPreview = form.querySelector('.article-preview__img-post');
+      const imgPostPreview = form.querySelector('.img-post__img');
+      const imgAuthorPreview = form.querySelector('#img-author-preview');
+
       reader.onloadend = function () {
         img.src = reader.result;
+        if (img.parentNode.classList.contains('author-photo')) {
+          imgAuthorPreview.src = reader.result;
+          imgAvatar.src = reader.result;
+          imgAuthorPreview.setAttribute("style", "display: block");
+          menuAvatar.setAttribute("style", "display: none");
+          imgAvatar.setAttribute("style", "display: block");
+        };
+        if (img.parentNode.classList.contains('big-img')) {
+          imgPreview.src = reader.result;
+          imgPreview.setAttribute("style", "display: block");
+          bigImgPreview.setAttribute("style", "display: none");
+        };
+        if (img.parentNode.classList.contains('small-img')) {
+          imgPostPreview.src = reader.result;
+          imgPostPreview.setAttribute("style", "display: block");
+        }
       }
       reader.addEventListener("load", () => {
         img.src = reader.result;
@@ -88,12 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (file) {
         reader.readAsDataURL(file);
       }
-    },
-    previewImg: function (img) {
-      const imgPreview = form.querySelector('.article-preview__img');
-      const imgPostPreview = form.querySelector('.img-post__img');
-      const imgAuthorPreview = form.querySelector('#img-author-preview');
-
     },
     previewFile: function () {
       const imgInput = this.parentNode.querySelector('.img-input');
@@ -110,9 +136,39 @@ document.addEventListener("DOMContentLoaded", () => {
         provisionSizeImg.setAttribute("style", "display: none");
       };
       appData.readerOnloadend(imgInput, reader, file);
-      appData.previewImg(imgInput);
-    }
+    },
+    sendForm: async function (data) {
+      const res = await fetch('/publish', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+    },
+    sendData: function (event) {
+      event.preventDefault()
 
+      let dataForm = {
+        title: inputTitle.value,
+        subtitle: inputSubtitle.value,
+        author: inputAuthorName.value,
+      }
+
+      appData.sendForm(dataForm)
+        .then(data => {
+          messagePublish.style.display = "flex";
+          // removeForm();
+          // formElements.forEach(input => {
+          //   input.value = '';
+          // });
+          // removeAvatar();
+
+          setTimeout(() => messagePublish.style.display = "none", 2500);
+        })
+        .catch(error => {
+          messageAlert.style.display = "flex";
+
+          setTimeout(() => messageAlert.style.display = "none", 2500);
+        });
+    },
   }
   appData.init();
 });
