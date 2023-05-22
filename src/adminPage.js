@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const formElements = form.querySelectorAll('input');
   const inputTitle = form.querySelector('[name="title"]');
   const inputSubtitle = form.querySelector('[name="subtitle"]');
-  const inputAuthorName = form.querySelector('[name="author name"]');
+  const inputAuthorName = form.querySelector('[name="author-name"]');
 
   const authorPhotoElems = form.querySelector('.form-data__author-photo');
   const imgCamera = authorPhotoElems.querySelector('.form-data__img-camera')
