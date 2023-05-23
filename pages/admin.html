@@ -46,25 +46,25 @@
                 <div class="form-block__form-wrapper form-wrapper">
                     <div class="form-wrapper__form-data form-data">
                         <label class="form-data__label">Title</label>
-                        <input class="form-data__input input" name="title" type="text"
+                        <input class="form-data__input input" name="Title" type="text"
                             placeholder="Please, enter any title post" required>
                         <span style="display: none;" class="form-data__title-required">Title is required.</span>
 
                         <label class="form-data__label">Short description</label>
-                        <input class="form-data__input input" name="subtitle" type="text"
+                        <input class="form-data__input input" name="Subtitle" type="text"
                             placeholder="Please, enter any description" required>
                         <span style="display: none;" class="form-data__description-required">Short description is
                             required.</span>
 
                         <label class="form-data__label">Author name</label>
-                        <input class="form-data__input form-data__input-without-border input" name="author" type="text"
+                        <input class="form-data__input form-data__input-without-border input" name="AuthorName" type="text"
                             placeholder="Enter author name" required>
                         <span style="display: none;" class="form-data__author-required">Author name is required.</span>
 
                         <!-- author-photo -->
                         <label class="form-data__label">Author Photo</label>
                         <div class="form-data__author-photo author-photo">
-                            <input class="form-data__input-hidden select" type="file" name="author_photo"
+                            <input class="form-data__input-hidden select" type="file" name="AuthorPhoto"
                                 id="author_photo">
                             <div class="form-data__upload-block">
                                 <span class="form-data__img-camera img-camera-border">
@@ -83,19 +83,19 @@
                         </div>
 
                         <label class="form-data__label">Publish Date</label>
-                        <input class="form-data__input input" name="date" type="date" placeholder="11.06.2023">
+                        <input class="form-data__input input" name="PublishDate" type="date" placeholder="11/06/2023">
 
                         <!-- big-img -->
                         <label class="form-data__label">Hero Image</label>
                         <div class="form-data__img-block">
-                            <input class="form-data__input-hidden select" type="file" name="input-bigImg"
+                            <input class="form-data__input-hidden select" type="file" name="BigImage"
                                 id="input-bigImg">
                             <div class="form-data__big-img big-img">
                                 <div class="form-data__upload-block">
                                     <img src="/static/img/camera.svg" alt="camera">
                                     <label class="form-data__upload-link" for="input-bigImg">Upload</label>
                                 </div>
-                                <img style="display: none" class="big-img__img img-input" src="" id="big-img" alt="Img">
+                                <img style="display: none" class="big-img__img img-input" src="" id="img-big" alt="Img">
                             </div>
                             <span class="form-data__provision-size">Size up to 10mb. Format: png,
                                 jpeg, gif.</span>
@@ -111,13 +111,13 @@
                         <!-- small-img -->
                         <label class="form-data__label">Hero Image</label>
                         <div class="form-data__img-block">
-                            <input class="form-data__input-hidden select" type="file" name="small-img" id="small-img">
+                            <input class="form-data__input-hidden select" type="file" name="SmallImage" id="small-img">
                             <div class="form-data__small-img small-img">
                                 <div class="form-data__upload-block">
                                     <img src="/static/img/camera.svg" alt="camera">
                                     <label class="form-data__upload-link" for="small-img">Upload</label>
                                 </div>
-                                <img style="display: none" class="small-img__img img-input" src="" id="small-img"
+                                <img style="display: none" class="small-img__img img-input" src="" id="img-small"
                                     alt="Img">
                             </div>
                             <span class="form-data__provision-size">Size up to 5mb. Format: png, jpeg,
@@ -180,7 +180,7 @@
                                             id="img-author-preview" alt="Img">
                                     </div>
                                     <span class="author-preview__author-name author">Enter author name</span>
-                                    <span class="author-preview__post-date">4/19/2023</span>
+                                    <span class="author-preview__post-date date">4/19/2023</span>
                                 </div>
                             </div>
                             <span class="post-frame__fade-right"></span>
@@ -192,7 +192,8 @@
             <div class="form__form-block form-block">
                 <h2 class="form-block__title">Content</h2>
                 <label class="form-data__label">Post content (plain text)</label>
-                <textarea class="form-data__content" name="" id="" cols="30" rows="10"
+                <input class="form-data__input-hidden input" type="text" name="Content">
+                <textarea class="form-data__content" name="content" id="" cols="30" rows="10"
                     placeholder="Type anything you want ..."></textarea>
             </div>
         </div>
