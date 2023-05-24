@@ -5,18 +5,17 @@
 
 .wrapper {
   background: linear-gradient(0deg, rgba(66, 70, 73, 0.4), rgba(66, 70, 73, 0.4)), url(/static/img/trostnik_trava.jpeg) no-repeat;
-  /* background-size: contain; */
-  /* width: 100%; */
+  background-size: contain;
+  background-size: 100% 100%;
 }
 
 .admin {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1180px;
+  max-width: 1180px;
   height: 100vh;
-  padding: 0 130px;
-  /* margin: 0 auto; */
+  margin: 0 auto;
 }
 
 .title-block {
@@ -45,11 +44,57 @@
   box-sizing: border-box;
   width: 480px;
   height: 560px;
+  margin-right: 130px;
   padding: 56px 40px;
   background: #FFFFFF;
   border-radius: 3px;
 }
 
 .login-block__title {
+  margin-bottom: 10px;
   font: 34px/40px 'Lora', sans-serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__email-label,
+.form__password-label {
+  margin-top: 40px;
+  font: 12px/16px 'Oxygen', sans-serif;
+  color: #7A7A7A;
+}
+
+.input {
+  width: 400px;
+  height: 40px;
+  padding-left: 4px;
+  border-width: 0 0 1px;
+  border-style: solid;
+  border-color: #EAEAEA;
+  /* border-bottom: 1px solid #EAEAEA; */
+}
+
+.form__password-form {
+  position: relative;
+}
+
+.form__password-eye-img {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+}
+
+.form__button {
+  width: 100px;
+  height: 48px;
+  margin-top: 40px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  font: 16px/24px 'Oxygen', sans-serif;
+  background: #DD783F;
+  color: #FFFFFF;
 }

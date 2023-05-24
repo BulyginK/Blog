@@ -157,10 +157,10 @@ document.addEventListener("DOMContentLoaded", () => {
         messagePublish.style.display = "flex";
         appData.removeInputValue();
         appData.removeSelectFiles();
-        // setTimeout(() => messagePublish.style.display = "none", 2500);
+        setTimeout(() => messagePublish.style.display = "none", 2500);
       } else {
         messageAlert.style.display = "flex";
-        // setTimeout(() => messageAlert.style.display = "none", 2500);
+        setTimeout(() => messageAlert.style.display = "none", 2500);
       }
     },
     sendData: function (event) {
