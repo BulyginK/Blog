@@ -2,13 +2,16 @@ package main
 
 import (
 	"database/sql"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"html/template"
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
@@ -50,9 +53,17 @@ type mostRecentData struct {
 }
 
 type createPostRequest struct {
-	Title    string `json:"title"`
-	Subtitle string `json:"subtitle"`
-	Author   string `json:"author"`
+	Title            string `json:"Title"`
+	Subtitle         string `json:"Subtitle"`
+	Author           string `json:"AuthorName"`
+	Avatar           string `json:"AuthorPhoto"`
+	AvatarNameFile   string `json:"AuthorPhotoName"`
+	PostDate         string `json:"PublishDate"`
+	BigImgPost       string `json:"BigImage"`
+	BigImgNameFile   string `json:"BigImageName"`
+	SmallImgPost     string `json:"SmallImage"`
+	SmallImgNameFile string `json:"SmallImageName"`
+	Content          string `json:"Content"`
 }
 
 func index(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
@@ -241,6 +252,27 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		err = base64InFile(req.Avatar, "static/img/"+req.AvatarNameFile)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		err = base64InFile(req.BigImgPost, "static/img/"+req.BigImgNameFile)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
+		err = base64InFile(req.SmallImgPost, "static/img/"+req.SmallImgNameFile)
+		if err != nil {
+			http.Error(w, "Internal Server Error", 500)
+			log.Println(err)
+			return
+		}
+
 		err = savePost(db, req)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
@@ -250,6 +282,23 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 
 		log.Println("Request completed successfully")
 	}
+}
+
+func base64InFile(imgInBase64 string, nameFile string) error {
+	data := imgInBase64[strings.IndexByte(imgInBase64, ',')+1:]
+	img, err := base64.StdEncoding.DecodeString(data)
+	if err != nil {
+		return err
+	}
+	fileImg, err := os.Create(nameFile)
+	if err != nil {
+		return err
+	}
+	_, err = fileImg.Write(img)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func admin() func(w http.ResponseWriter, r *http.Request) {
@@ -299,16 +348,32 @@ func savePost(db *sqlx.DB, req createPostRequest) error {
 		(
 			title,
 			subtitle,
-			author
+			author,
+			author_ur,
+			publish_date,
+			image_url,
+			small_image_url,
+			content
 		)
 		VALUES
 		(
-			?,
-			?,
-			?
+			?,?,?,?,?,?,?,?
 		)
 	`
-	log.Println("Request completed successfully")
-	_, err := db.Exec(query, req.Title, req.Subtitle, req.Author)
-	return err
+
+	result, err := db.Exec(query,
+		req.Title,
+		req.Subtitle,
+		req.Author,
+		req.Avatar,
+		req.PostDate,
+		req.BigImgPost,
+		req.SmallImgPost,
+		req.Content,
+	)
+	if err != nil {
+		log.Println(result)
+		return err
+	}
+	return nil
 }

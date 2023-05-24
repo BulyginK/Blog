@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectFiles = form.querySelectorAll('.select');
   let inputValue = form.querySelectorAll('.input');
 
+  const imgAutor = form.querySelector('#author_photo');
+  const imgBigImg = form.querySelector('#input-bigImg');
+  const imgSmallImg = form.querySelector('#small-img');
   const inputDate = form.querySelector('[name="date"]');
   const inputContent = form.querySelector('[name="content"]');
 
@@ -146,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return errors
     },
     sendForm: async function (data) {
-      const res = await fetch('/publish', {
+      const res = await fetch('/api/post', {
         method: 'POST',
         body: JSON.stringify(data),
       });
@@ -154,10 +157,10 @@ document.addEventListener("DOMContentLoaded", () => {
         messagePublish.style.display = "flex";
         appData.removeInputValue();
         appData.removeSelectFiles();
-        setTimeout(() => messagePublish.style.display = "none", 2500);
+        // setTimeout(() => messagePublish.style.display = "none", 2500);
       } else {
         messageAlert.style.display = "flex";
-        setTimeout(() => messageAlert.style.display = "none", 2500);
+        // setTimeout(() => messageAlert.style.display = "none", 2500);
       }
     },
     sendData: function (event) {
@@ -166,14 +169,17 @@ document.addEventListener("DOMContentLoaded", () => {
       let dateString = date.toLocaleDateString('en-US');
 
       let jsonData = {
-        Title: appData.formData['title'],
-        Subtitle: appData.formData['subtitle'],
-        AuthorName: appData.formData['author'],
-        AuthorPhoto: appData.formData['avatar'],
-        PublishDate: dateString,
-        BigImage: appData.formData['big-image'],
-        SmallImage: appData.formData['small-img'],
-        Content: appData.formData['content'],
+        Title:            appData.formData['title'],
+        Subtitle:         appData.formData['subtitle'],
+        AuthorName:       appData.formData['author'],
+        AuthorPhoto:      appData.formData['avatar'],
+        AuthorPhotoName:  imgAutor.files[0].name,
+        PublishDate:      dateString,
+        BigImage:         appData.formData['big-image'],
+        BigImageName:     imgBigImg.files[0].name,
+        SmallImage:       appData.formData['small-img'],
+        SmallImageName:   imgSmallImg.files[0].name,
+        Content:          appData.formData['content'],
       };
       console.log(jsonData);
 
@@ -193,4 +199,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   appData.init();
-});
+})
