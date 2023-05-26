@@ -252,26 +252,30 @@ func createPost(db *sqlx.DB) func(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		err = base64InFile(req.Avatar, "static/img/"+req.AvatarNameFile)
+		err = base64InFile(req.Avatar, req.AvatarNameFile)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
 			log.Println(err)
 			return
 		}
 
-		err = base64InFile(req.BigImgPost, "static/img/"+req.BigImgNameFile)
+		err = base64InFile(req.BigImgPost, req.BigImgNameFile)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
 			log.Println(err)
 			return
 		}
 
-		err = base64InFile(req.SmallImgPost, "static/img/"+req.SmallImgNameFile)
+		err = base64InFile(req.SmallImgPost, req.SmallImgNameFile)
 		if err != nil {
 			http.Error(w, "Internal Server Error", 500)
 			log.Println(err)
 			return
 		}
+
+		req.AvatarNameFile = "/static/img/" + req.AvatarNameFile
+		req.BigImgNameFile = "/static/img/" + req.BigImgNameFile
+		req.SmallImgNameFile = "/static/img/" + req.SmallImgNameFile
 
 		err = savePost(db, req)
 		if err != nil {
@@ -290,7 +294,7 @@ func base64InFile(imgInBase64 string, nameFile string) error {
 	if err != nil {
 		return err
 	}
-	fileImg, err := os.Create(nameFile)
+	fileImg, err := os.Create("static/img/" + nameFile)
 	if err != nil {
 		return err
 	}
@@ -365,10 +369,10 @@ func savePost(db *sqlx.DB, req createPostRequest) error {
 		req.Title,
 		req.Subtitle,
 		req.Author,
-		req.Avatar,
+		req.AvatarNameFile,
 		req.PostDate,
-		req.BigImgPost,
-		req.SmallImgPost,
+		req.BigImgNameFile,
+		req.SmallImgNameFile,
 		req.Content,
 	)
 	if err != nil {

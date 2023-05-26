@@ -8,14 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const messagePublish = document.querySelector('.show-message__publish');
   const buttonPublish = document.querySelector('.main-top__publ-button');
 
-  let selectFiles = form.querySelectorAll('.select');
-  let inputValue = form.querySelectorAll('.input');
-
   const imgAutor = form.querySelector('#author_photo');
   const imgBigImg = form.querySelector('#input-bigImg');
   const imgSmallImg = form.querySelector('#small-img');
   const inputDate = form.querySelector('[name="date"]');
   const inputContent = form.querySelector('[name="content"]');
+
+  let selectFiles = form.querySelectorAll('.select');
+  let inputValue = form.querySelectorAll('.input');
 
   const appData = {
     defaultValue: {},
@@ -169,17 +169,17 @@ document.addEventListener("DOMContentLoaded", () => {
       let dateString = date.toLocaleDateString('en-US');
 
       let jsonData = {
-        Title:            appData.formData['title'],
-        Subtitle:         appData.formData['subtitle'],
-        AuthorName:       appData.formData['author'],
-        AuthorPhoto:      appData.formData['avatar'],
-        AuthorPhotoName:  imgAutor.files[0].name,
-        PublishDate:      dateString,
-        BigImage:         appData.formData['big-image'],
-        BigImageName:     imgBigImg.files[0].name,
-        SmallImage:       appData.formData['small-img'],
-        SmallImageName:   imgSmallImg.files[0].name,
-        Content:          appData.formData['content'],
+        Title: appData.formData['title'],
+        Subtitle: appData.formData['subtitle'],
+        AuthorName: appData.formData['author'],
+        AuthorPhoto: appData.formData['avatar'],
+        AuthorPhotoName: imgAutor.files[0].name,
+        PublishDate: dateString,
+        BigImage: appData.formData['big-image'],
+        BigImageName: imgBigImg.files[0].name,
+        SmallImage: appData.formData['small-img'],
+        SmallImageName: imgSmallImg.files[0].name,
+        Content: appData.formData['content'],
       };
       console.log(jsonData);
 
