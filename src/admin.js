@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let selectFiles = form.querySelectorAll('.select');
   let inputValue = form.querySelectorAll('.input');
+  const classRedBorder = 'form-data__input-border-red';
 
   const appData = {
     defaultValue: {},
@@ -51,8 +52,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (this.value === "") {
         titleNoName.setAttribute("style", "display: block");
+        this.classList.add(classRedBorder);
       } else if (this.type !== "date") {
         titleNoName.setAttribute("style", "display: none");
+        this.classList.remove(classRedBorder);
       };
     },
     addDataForm: function () {
@@ -83,6 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const bigImgPreview = form.querySelector('.article-preview__img-post');
       const imgPostPreview = form.querySelector('.img-post__img');
       const imgAuthorPreview = form.querySelector('#img-author-preview');
+      const classImgBorder = 'form-data__big-img-border';
+      console.log(img);
 
       reader.onloadend = function () {
         img.src = reader.result;
@@ -97,10 +102,12 @@ document.addEventListener("DOMContentLoaded", () => {
           imgPreview.src = reader.result;
           imgPreview.setAttribute("style", "display: block");
           bigImgPreview.setAttribute("style", "display: none");
+          img.parentNode.classList.add(classImgBorder);
         };
         if (img.parentNode.classList.contains('small-img')) {
           imgPostPreview.src = reader.result;
           imgPostPreview.setAttribute("style", "display: block");
+          img.parentNode.classList.add(classImgBorder);
         }
       }
       reader.addEventListener("load", () => {
@@ -118,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const removeBlock = this.parentNode.querySelector('.remove-block');
       const uploadBlock = this.parentNode.querySelector('.form-data__upload-block');
       const provisionSizeImg = this.parentNode.querySelector('.form-data__provision-size');
+
       const file = this.parentNode.querySelector('input[type=file]').files[0];
       const reader = new FileReader();
 
@@ -190,6 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (inputValue[i].value === "") {
             let titleNoName = inputValue[i].nextElementSibling;
             titleNoName.setAttribute("style", "display: block");
+            inputValue[i].classList.add(classRedBorder);
           }
         };
         messageAlert.style.display = "flex";

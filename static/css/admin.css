@@ -293,6 +293,11 @@ body {
   border-radius: 6px;
 }
 
+.form-data__big-img-border {
+  border: 1px solid #EAEAEA;
+  border-radius: 5px;
+}
+
 .form-wrapper__form-preview {
   width: 440px;
   padding-top: 40px;
