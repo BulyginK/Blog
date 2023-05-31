@@ -87,11 +87,18 @@ body {
 
 .show-message__alert,
 .show-message__publish {
-  display: flex;
   align-items: center;
-  height: 44px;
+  height: 0;
   padding-left: 10px;
   border-radius: 5px;
+  transition: height .3s;
+  overflow: hidden;
+}
+
+.show-message-visibility {
+  display: flex;
+  height: 44px;
+  transition: height 2s;
 }
 
 .show-message__alert {

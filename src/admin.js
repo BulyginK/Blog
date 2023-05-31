@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let selectFiles = form.querySelectorAll('.select');
   let inputValue = form.querySelectorAll('.input');
   const classRedBorder = 'form-data__input-border-red';
+  const classVisibilityMessage = 'show-message-visibility';
 
   const appData = {
     defaultValue: {},
@@ -56,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (this.type !== "date") {
         titleNoName.setAttribute("style", "display: none");
         this.classList.remove(classRedBorder);
+        messageAlert.classList.remove(classVisibilityMessage);
       };
     },
     addDataForm: function () {
@@ -156,37 +158,47 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       return errors
     },
+    nameFile: function () {
+      let name = imgAutor.files;
+      
+      if (name === undefined) {
+        return undefined
+      } else {
+        return name.name
+      }
+    },
     sendForm: async function (data) {
       const res = await fetch('/api/post', {
         method: 'POST',
         body: JSON.stringify(data),
       });
       if (res.ok) {
-        messagePublish.style.display = "flex";
         appData.removeInputValue();
         appData.removeSelectFiles();
-        setTimeout(() => messagePublish.style.display = "none", 2500);
+        messagePublish.classList.add(classVisibilityMessage);
       } else {
-        messageAlert.style.display = "flex";
-        setTimeout(() => messageAlert.style.display = "none", 2500);
+        messageAlert.classList.add(classVisibilityMessage);
       }
     },
     sendData: function (event) {
       event.preventDefault()
       let date = new Date(inputDate.value);
       let dateString = date.toLocaleDateString('en-US');
-
+      let nameImgAutor = imgAutor.files.length === 0 ? undefined : imgAutor.files[0].name;
+      let nameBigImg = imgBigImg.files.length === 0 ? undefined : imgBigImg.files[0].name;
+      let nameSmallImg = imgSmallImg.files.length === 0 ? undefined : imgSmallImg.files[0].name;
+      
       let jsonData = {
         Title: appData.formData['title'],
         Subtitle: appData.formData['subtitle'],
         AuthorName: appData.formData['author'],
         AuthorPhoto: appData.formData['avatar'],
-        AuthorPhotoName: imgAutor.files[0].name,
+        AuthorPhotoName: nameImgAutor,
         PublishDate: dateString,
         BigImage: appData.formData['big-image'],
-        BigImageName: imgBigImg.files[0].name,
+        BigImageName: nameBigImg,
         SmallImage: appData.formData['small-img'],
-        SmallImageName: imgSmallImg.files[0].name,
+        SmallImageName: nameSmallImg,
         Content: appData.formData['content'],
       };
       console.log(jsonData);
@@ -200,9 +212,8 @@ document.addEventListener("DOMContentLoaded", () => {
             titleNoName.setAttribute("style", "display: block");
             inputValue[i].classList.add(classRedBorder);
           }
-        };
-        messageAlert.style.display = "flex";
-        setTimeout(() => messageAlert.style.display = "none", 2500);
+        }
+        messageAlert.classList.add(classVisibilityMessage);
       }
     }
   }

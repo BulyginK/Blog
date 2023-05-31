@@ -65,10 +65,10 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     validate: function (jsonData) {
       let errors = 0;
-      let pattern = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
+      let pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/ 
+      // /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
       // /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
       
-
       for (let key in jsonData) {
         if (!jsonData[key]) {
           alertEmpty.setAttribute("style", "display: flex");
@@ -81,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
       return errors
-      // 
     },
     login: function (event) {
       event.preventDefault()
