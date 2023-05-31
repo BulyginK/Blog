@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora&family=Oxygen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/login.css">
+    <script src="/src/login.js" defer></script>
 </head>
 
 <body>
@@ -22,25 +23,31 @@
             <form class="admin-wrapper__login-block login-block">
                 <h2 class="login-block__title">Log In</h2>
                 <div class="login-block__form form">
-                    <!-- style="display: none"  -->
-                    <div class="show-message__alert">
+
+                    <div style="display: none" class="form__alert-incorrect alert">
                         <img src="/static/img/alert.svg" alt="Alert">
                         <span class="alert__label">Email or password is incorrect.</span>
                     </div>
-                    <div class="show-message__alert">
+                    <div style="display: none" class="form__alert-empty alert">
                         <img src="/static/img/alert.svg" alt="Alert">
-                        <span class="alert__label">A-Ah! Check all fields,</span>
+                        <span class="alert__label">A-Ah! Check all fields.</span>
                     </div>
+
                     <label class="form__email-label" for="email">Email</label>
-                    <input class="form__email-form input" type="email" name="email" id="email" placeholder="" required>
-                    <label class="form__password-label" for="password">Password</label>
-                    <div class="form__password-form input">
-                        <input class="input__password" type="password" name="password" id="password" placeholder=""
-                            required>
-                        <img style="display: none;" class="form__password-eye-img" src="/static/img/eye.svg"
-                            alt="eye-off">
-                        <img class="form__password-eye-img" src="/static/img/eye-off.svg" alt="">
+                    <div class="form__email-input">
+                        <input class="input__email input" type="email" name="email" id="email" placeholder="" required>
                     </div>
+                    <span style="display: none" class="form__required-alert">Email is required.</span>
+                    <span style="display: none" class="form__incorrect-alert">Incorrect email format. Correct format is ****@**.***</span>
+
+                    <label class="form__password-label " for="password">Password</label>
+                    <div class="form__password-input">
+                        <input class="input__password input" type="password" name="password" id="password" placeholder=""
+                            required>
+                        <img class="input__eye-img" src="/static/img/eye-off.svg" alt="eye">
+                    </div>
+                    <span style="display: none" class="form__required-alert">Password is required.</span>
+
                     <button class="form__button" type="submit">Log In</button>
                 </div>
             </form>
