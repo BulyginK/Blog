@@ -70,7 +70,7 @@
 .input {
   width: 400px;
   height: 40px;
-  padding-left: 4px;
+
   border-width: 0 0 1px;
   border-style: solid;
   border-color: #EAEAEA;
@@ -81,10 +81,19 @@
   position: relative;
 }
 
+.input__password {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding-left: 4px;
+}
+
 .form__password-eye-img {
   position: absolute;
   width: 24px;
   height: 24px;
+  top: calc(50% - 24px/2);
+  right: 4px;
 }
 
 .form__button {
