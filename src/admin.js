@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     nameFile: function () {
       let name = imgAutor.files;
-      
+
       if (name === undefined) {
         return undefined
       } else {
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let nameImgAutor = imgAutor.files.length === 0 ? undefined : imgAutor.files[0].name;
       let nameBigImg = imgBigImg.files.length === 0 ? undefined : imgBigImg.files[0].name;
       let nameSmallImg = imgSmallImg.files.length === 0 ? undefined : imgSmallImg.files[0].name;
-      
+
       let jsonData = {
         Title: appData.formData['title'],
         Subtitle: appData.formData['subtitle'],

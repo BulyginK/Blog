@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const classGreyBackground = 'input-background-grey';
   const srcEyeShow = '/static/img/eye.svg';
   const srcEyeHide = '/static/img/eye-off.svg';
+  const classVisibilityMessage = 'alert-visibility';
   let showPw = 0;
 
   const appData = {
@@ -40,10 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
         requiredAlert.setAttribute("style", "display: block");
         this.classList.add(classRedBorder);
         this.classList.remove(classGreyBackground);
+        alertEmpty.classList.remove(classVisibilityMessage);
+        alertIncorrect.classList.remove(classVisibilityMessage);
       } else {
         requiredAlert.setAttribute("style", "display: none");
         this.classList.remove(classRedBorder);
         this.classList.add(classGreyBackground);
+        alertEmpty.classList.remove(classVisibilityMessage);
+        alertIncorrect.classList.remove(classVisibilityMessage);
       };
     },
     showPassword: function () {
@@ -65,21 +70,28 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     validate: function (jsonData) {
       let errors = 0;
-      let pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/ 
+      let pattern = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
       // /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
       // /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
-      
+
       for (let key in jsonData) {
         if (!jsonData[key]) {
-          alertEmpty.setAttribute("style", "display: flex");
-          setTimeout(() => alertEmpty.style.display = "none", 2500);
+          alertEmpty.classList.add(classVisibilityMessage);
+          alertEmpty.setAttribute("style", "display: block");
           errors++
-        } else if(!pattern.test(inputEmail.value)) {
-          alertIncorrect.setAttribute("style", "display: flex");
-          setTimeout(() => alertIncorrect.style.display = "none", 2500);
+
+        } else if (!pattern.test(inputEmail.value)) {
+          alertIncorrect.classList.add(classVisibilityMessage);
+          alertEmpty.style.removeProperty('display');
           errors++
         }
-      }
+
+      };
+      // if (jsonData[key] === undefined) {
+      //   alertEmpty.classList.add(classVisibilityMessage);
+      //   // setTimeout(() => alertEmpty.style.display = "none", 2500);
+      //   errors++
+      // setTimeout(() => alertIncorrect.style.display = "none", 2500);
       return errors
     },
     login: function (event) {
@@ -89,10 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
         Email: appData.formData['email'],
         Password: appData.formData['password'],
       };
-      console.log(jsonData);
 
       if (!appData.validate(jsonData)) {
         alert('Все ОК');
+      } else {
+
       }
     }
   }
