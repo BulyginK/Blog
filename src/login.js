@@ -3,6 +3,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const inputValue = document.querySelectorAll('.input');
   const inputEmail = document.querySelector('.input__email');
+  const alertBlock = document.querySelector('.form__alert');
   const alertIncorrect = document.querySelector('.form__alert-incorrect');
   const alertEmpty = document.querySelector('.form__alert-empty');
   const buttomLogIn = document.querySelector('.form__button');
@@ -77,21 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let key in jsonData) {
         if (!jsonData[key]) {
           alertEmpty.classList.add(classVisibilityMessage);
-          alertEmpty.setAttribute("style", "display: block");
-          errors++
-
-        } else if (!pattern.test(inputEmail.value)) {
-          alertIncorrect.classList.add(classVisibilityMessage);
-          alertEmpty.style.removeProperty('display');
           errors++
         }
-
       };
-      // if (jsonData[key] === undefined) {
-      //   alertEmpty.classList.add(classVisibilityMessage);
-      //   // setTimeout(() => alertEmpty.style.display = "none", 2500);
-      //   errors++
-      // setTimeout(() => alertIncorrect.style.display = "none", 2500);
+      if (errors == 0 && !pattern.test(inputEmail.value)) {
+        alertIncorrect.classList.add(classVisibilityMessage);
+        errors++
+      }
       return errors
     },
     login: function (event) {
