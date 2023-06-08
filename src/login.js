@@ -85,11 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
           errors++
         }
       };
-      // if (errors == 0 && !pattern.test(inputEmail.value)) {
-      //   alertIncorrect.classList.add(classVisibilityMessage);
-      //   incorrectEmail.setAttribute("style", "display: block");
-      //   errors++
-      // }
       if (errors == 0 && !pattern.test(inputEmail.value)) {
         alertIncorrect.classList.add(classVisibilityMessage);
         inputEmail.classList.add(classRedBorder);
