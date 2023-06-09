@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let inputValue = form.querySelectorAll('.input');
   const classRedBorder = 'form-data__input-border-red';
   const classVisibilityMessage = 'show-message-visibility';
+  const classContentRedBorder = 'form-data__content-border-red';
 
   const appData = {
     defaultValue: {},
@@ -89,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const imgPostPreview = form.querySelector('.img-post__img');
       const imgAuthorPreview = form.querySelector('#img-author-preview');
       const classImgBorder = 'form-data__big-img-border';
-      console.log(img);
 
       reader.onloadend = function () {
         img.src = reader.result;
@@ -120,6 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       if (file) {
         reader.readAsDataURL(file);
+        console.log('img: ', img.parentNode.nextElementSibling);
+        img.parentNode.nextElementSibling.setAttribute("style", "display: none");
       }
     },
     previewFile: function () {
@@ -158,15 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       return errors
     },
-    nameFile: function () {
-      let name = imgAutor.files;
-
-      if (name === undefined) {
-        return undefined
-      } else {
-        return name.name
-      }
-    },
     sendForm: async function (data) {
       const res = await fetch('/api/post', {
         method: 'POST',
@@ -180,8 +173,26 @@ document.addEventListener("DOMContentLoaded", () => {
         messageAlert.classList.add(classVisibilityMessage);
       }
     },
+    highlightingRequired: function () {
+      for (let i = 0; i < inputValue.length; i++) {
+        if (inputValue[i].value === "") {
+          let titleNoName = inputValue[i].nextElementSibling;
+          titleNoName.setAttribute("style", "display: block");
+          inputValue[i].classList.add(classRedBorder);
+        }
+      };
+      for (let i = 0; i < selectFiles.length; i++) {
+        if(selectFiles[i].value === "") {
+          selectFiles[i].parentNode.nextElementSibling.setAttribute("style", "display: block");
+        }
+      };
+      if(inputContent.value === "") {
+        inputContent.nextElementSibling.setAttribute("style", "display: block");
+        inputContent.classList.add(classContentRedBorder);
+      }
+    },
     sendData: function (event) {
-      event.preventDefault()
+      event.preventDefault();
       let date = new Date(inputDate.value);
       let dateString = date.toLocaleDateString('en-US');
       let nameImgAutor = imgAutor.files.length === 0 ? undefined : imgAutor.files[0].name;
@@ -206,13 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!appData.validate(jsonData)) {
         appData.sendForm(jsonData);
       } else {
-        for (let i = 0; i < inputValue.length; i++) {
-          if (inputValue[i].value === "") {
-            let titleNoName = inputValue[i].nextElementSibling;
-            titleNoName.setAttribute("style", "display: block");
-            inputValue[i].classList.add(classRedBorder);
-          }
-        }
+        appData.highlightingRequired();
         messageAlert.classList.add(classVisibilityMessage);
       }
     }

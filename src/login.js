@@ -107,10 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < inputValue.length; i++) {
           if (inputValue[i].value === "") {
             let requiredAlert = inputValue[i].parentNode.nextElementSibling;
-            // console.log('requiredAlert: ', requiredAlert);
+
             inputValue[i].classList.add(classRedBorder);
             requiredAlert.setAttribute("style", "display: block");
-            inputValue[i].classList.add(classRedBorder);
           }
         }
       }

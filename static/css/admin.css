@@ -193,7 +193,8 @@ body {
 
 .form-data__title-required,
 .form-data__description-required,
-.form-data__author-required {
+.form-data__author-required,
+.form-data__input-required {
   margin-top: 5px;
   font: 12px/16px 'Oxygen', sans-serif;
   color: #E86961;
@@ -508,4 +509,8 @@ body {
 .form-data__content::placeholder {
   font: 16px/24px 'Oxygen', sans-serif;
   color: #999999;
+}
+
+.form-data__content-border-red {
+  border: 1px solid #E86961;
 }
