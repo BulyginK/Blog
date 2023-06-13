@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const messageAlert = document.querySelector('.show-message__alert');
   const messagePublish = document.querySelector('.show-message__publish');
   const buttonPublish = document.querySelector('.main-top__publ-button');
+  const removeImgAuthorButton = document.querySelector('.remove-file-avatar');
+  const removeImgButtons = document.querySelectorAll('.remove-file-img');
 
   const imgAutor = form.querySelector('#author_photo');
   const imgBigImg = form.querySelector('#input-bigImg');
@@ -19,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const classRedBorder = 'form-data__input-border-red';
   const classVisibilityMessage = 'show-message-visibility';
   const classContentRedBorder = 'form-data__content-border-red';
+  const classImgBorder = 'form-data__big-img-border';
 
   const appData = {
     defaultValue: {},
@@ -29,6 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
       this.addDefaultValue();
       buttonPublish.addEventListener('click', this.sendData);
       inputContent.addEventListener('input', this.addDataForm);
+      inputContent.addEventListener('input', this.checkContent);
+      removeImgAuthorButton.addEventListener('click', this.removeImgAuthor);
     },
     addListeners: function () {
       for (let i = 0; i < selectFiles.length; i++) {
@@ -43,6 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i < inputValue.length; i++) {
         inputValue[i].addEventListener('input', this.addDataForm);
       };
+      for (let i = 0; i < removeImgButtons.length; i++) {
+        removeImgButtons[i].addEventListener('click', this.removeImg);
+      };
     },
     addDefaultValue: function () {
       for (let i = 0; i < inputValue.length; i++) {
@@ -55,9 +63,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (this.value === "") {
         titleNoName.setAttribute("style", "display: block");
         this.classList.add(classRedBorder);
-      } else if (this.type !== "date") {
+      } else {
         titleNoName.setAttribute("style", "display: none");
         this.classList.remove(classRedBorder);
+        messageAlert.classList.remove(classVisibilityMessage);
+      };
+    },
+    checkContent: function () {
+      if (this.value === "") {
+        this.nextElementSibling.setAttribute("style", "display: block");
+        this.classList.add(classContentRedBorder);
+      } else {
+        this.nextElementSibling.setAttribute("style", "display: none");
+        this.classList.remove(classContentRedBorder);
         messageAlert.classList.remove(classVisibilityMessage);
       };
     },
@@ -89,11 +107,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const bigImgPreview = form.querySelector('.article-preview__img-post');
       const imgPostPreview = form.querySelector('.img-post__img');
       const imgAuthorPreview = form.querySelector('#img-author-preview');
-      const classImgBorder = 'form-data__big-img-border';
+      // const classImgBorder = 'form-data__big-img-border';
 
       reader.onloadend = function () {
         img.src = reader.result;
-        if (img.parentNode.classList.contains('author-photo')) {
+        if (img.parentNode.parentNode.classList.contains('author-photo')) {
           imgAuthorPreview.src = reader.result;
           imgAvatar.src = reader.result;
           imgAuthorPreview.setAttribute("style", "display: block");
@@ -120,8 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       if (file) {
         reader.readAsDataURL(file);
-        console.log('img: ', img.parentNode.nextElementSibling);
-        img.parentNode.nextElementSibling.setAttribute("style", "display: none");
+        img.parentNode.parentNode.nextElementSibling.setAttribute("style", "display: none");;
       }
     },
     previewFile: function () {
@@ -145,11 +162,92 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i < inputValue.length; i++) {
         inputValue[i].value = '';
       };
+      inputContent.value = '';
     },
     removeSelectFiles: function () {
       for (let i = 0; i < inputValue.length; i++) {
         inputValue[i].value = '';
       };
+    },
+    removeImgAuthor: function (e) {
+      e.preventDefault();
+      const imgInput = this.parentNode.parentNode.querySelector('.img-input');
+      const removeBlock = this.parentNode.parentNode.querySelector('.remove-block');
+      const uploadBlock = this.parentNode.parentNode.querySelector('.form-data__upload-block');
+      const imgAuthorPreview = form.querySelector('#img-author-preview');
+
+      imgAuthorPreview.src = "";
+      imgAvatar.src = "";
+      imgAuthorPreview.setAttribute("style", "display: none");
+      imgAvatar.setAttribute("style", "display: none");
+      imgInput.setAttribute("style", "display: none");
+      removeBlock.setAttribute("style", "display: none");
+      uploadBlock.setAttribute("style", "display: flex");
+      menuAvatar.setAttribute("style", "display: flex");
+    },
+    removeAvatar: function (img) {
+      const imgInput = img.parentNode.parentNode.querySelector('.img-input');
+      const removeBlock = img.parentNode.parentNode.querySelector('.remove-block');
+      const uploadBlock = img.parentNode.parentNode.querySelector('.form-data__upload-block');
+      const imgAuthorPreview = form.querySelector('#img-author-preview');
+
+      imgAuthorPreview.src = "";
+      imgAvatar.src = "";
+      imgAuthorPreview.setAttribute("style", "display: none");
+      imgAvatar.setAttribute("style", "display: none");
+      imgInput.setAttribute("style", "display: none");
+      removeBlock.setAttribute("style", "display: none");
+      uploadBlock.setAttribute("style", "display: flex");
+      menuAvatar.setAttribute("style", "display: flex");
+    },
+    removeImg: function (e) {
+      e.preventDefault();
+      const imgInput = this.parentNode.parentNode.querySelector('.img-input');
+      const bigImgPreview = form.querySelector('.article-preview__img-post');
+      const imgPreview = form.querySelector('.article-preview__img');
+      const imgPostPreview = form.querySelector('.img-post__img');
+      const provisionSizeImg = this.parentNode.parentNode.querySelector('.form-data__provision-size');
+      const uploadBlock = this.parentNode.parentNode.querySelector('.form-data__upload-block');
+      const removeBlock = this.parentNode;
+      imgInput.src = "";
+      imgInput.setAttribute("style", "display: none");
+      removeBlock.setAttribute("style", "display: none");
+      uploadBlock.setAttribute("style", "display: flex");
+      provisionSizeImg.setAttribute("style", "display: block");
+      imgInput.parentNode.classList.remove(classImgBorder);
+      if (this.parentNode.parentNode.classList.contains('big-img')) {
+        imgPreview.src = "";
+        imgPreview.setAttribute("style", "display: none");
+        bigImgPreview.setAttribute("style", "display: block");
+      };
+      if (this.parentNode.parentNode.classList.contains('small-img')) {
+        imgPostPreview.src = "";
+        imgPostPreview.setAttribute("style", "display: none");
+      }
+    },
+    removeImgs: function (img) {
+      const imgInput = img.parentNode.parentNode.querySelector('.img-input');
+      const bigImgPreview = form.querySelector('.article-preview__img-post');
+      const imgPreview = form.querySelector('.article-preview__img');
+      const imgPostPreview = form.querySelector('.img-post__img');
+      const provisionSizeImg = img.parentNode.parentNode.querySelector('.form-data__provision-size');
+      const uploadBlock = img.parentNode.parentNode.querySelector('.form-data__upload-block');
+      const removeBlock = img.parentNode;
+      imgInput.src = "";
+      imgInput.setAttribute("style", "display: none");
+      removeBlock.setAttribute("style", "display: none");
+      uploadBlock.setAttribute("style", "display: flex");
+      provisionSizeImg.setAttribute("style", "display: block");
+      imgInput.parentNode.classList.remove(classImgBorder);
+      if (img.parentNode.parentNode.classList.contains('big-img')) {
+        imgPreview.src = "";
+        imgPreview.setAttribute("style", "display: none");
+        bigImgPreview.setAttribute("style", "display: block");
+      };
+      if (img.parentNode.parentNode.classList.contains('small-img')) {
+        imgPostPreview.src = "";
+        imgPostPreview.setAttribute("style", "display: none");
+      }
     },
     validate: function (jsonData) {
       let errors = 0;
@@ -166,11 +264,10 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(data),
       });
       if (res.ok) {
-        appData.removeInputValue();
-        appData.removeSelectFiles();
         messagePublish.classList.add(classVisibilityMessage);
       } else {
-        messageAlert.classList.add(classVisibilityMessage);
+        console.log(res);
+        // messageAlert.classList.add(classVisibilityMessage);
       }
     },
     highlightingRequired: function () {
@@ -182,11 +279,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       };
       for (let i = 0; i < selectFiles.length; i++) {
-        if(selectFiles[i].value === "") {
+        if (selectFiles[i].value === "") {
           selectFiles[i].parentNode.nextElementSibling.setAttribute("style", "display: block");
         }
       };
-      if(inputContent.value === "") {
+      if (inputContent.value === "") {
         inputContent.nextElementSibling.setAttribute("style", "display: block");
         inputContent.classList.add(classContentRedBorder);
       }
@@ -216,6 +313,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!appData.validate(jsonData)) {
         appData.sendForm(jsonData);
+        appData.removeInputValue();
+        appData.removeAvatar(removeImgAuthorButton);
+        for (let i = 0; i < removeImgButtons.length; i++) {
+          appData.removeImgs(removeImgButtons[i]);
+        };
       } else {
         appData.highlightingRequired();
         messageAlert.classList.add(classVisibilityMessage);

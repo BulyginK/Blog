@@ -271,3 +271,7 @@
     height: 89px;
     background: rgba(35, 47, 56, 0.6);
 }
+
+@media screen and (max-width: 1365px) {}
+
+@media screen and (max-width: 1023px) {}
