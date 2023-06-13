@@ -24,12 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const classImgBorder = 'form-data__big-img-border';
 
   const appData = {
-    defaultValue: {},
     formData: {},
     maxLengthValue: 30,
     init: function () {
       this.addListeners();
-      this.addDefaultValue();
       buttonPublish.addEventListener('click', this.sendData);
       inputContent.addEventListener('input', this.addDataForm);
       inputContent.addEventListener('input', this.checkContent);
@@ -50,11 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
       };
       for (let i = 0; i < removeImgButtons.length; i++) {
         removeImgButtons[i].addEventListener('click', this.removeImg);
-      };
-    },
-    addDefaultValue: function () {
-      for (let i = 0; i < inputValue.length; i++) {
-        this.defaultValue[inputValue[i].name] = inputValue[i].placeholder;
       };
     },
     checkValue: function () {
@@ -107,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const bigImgPreview = form.querySelector('.article-preview__img-post');
       const imgPostPreview = form.querySelector('.img-post__img');
       const imgAuthorPreview = form.querySelector('#img-author-preview');
-      // const classImgBorder = 'form-data__big-img-border';
 
       reader.onloadend = function () {
         img.src = reader.result;
@@ -265,9 +257,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       if (res.ok) {
         messagePublish.classList.add(classVisibilityMessage);
+        setTimeout(() => messagePublish.classList.remove(classVisibilityMessage), 3000);
       } else {
         console.log(res);
-        // messageAlert.classList.add(classVisibilityMessage);
+        messageAlert.classList.add(classVisibilityMessage);
       }
     },
     highlightingRequired: function () {

@@ -23,6 +23,17 @@
                 <a class="nav-items__item nav-items__item-color-white" href="#">About</a>
                 <a class="nav-items__item nav-items__item-color-white" href="#">Contact</a>
             </nav>
+            <div class="nav-menu__mobile-menu mobile-menu">
+                <div data-mobile-menu="mobilmenu" class="hamburger mobile-menu__hamburger">
+                    <span data-mobile-menu="mobilmenu"></span>
+                </div>
+                <nav style="display: none;" class="mobile-menu__nav-items nav-items">
+                    <a class="nav-items__item nav-items__item-color-white" href="#">Home</a>
+                    <a class="nav-items__item nav-items__item-color-white" href="#">Categories</a>
+                    <a class="nav-items__item nav-items__item-color-white" href="#">About</a>
+                    <a class="nav-items__item nav-items__item-color-white" href="#">Contact</a>
+                </nav>
+            </div>
         </div>
         <h1 class="header__title">Let's do it together.</h1>
         <p class="header__slogan">We travel the world in search of stories. Come along for the ride.</p>
@@ -68,7 +79,7 @@
                     <div class="small-card__about-block about-block">
                         <img class="about-block__avatar" src="{{ .Avatar }}" alt="{{ .Author }}">
                         <span class="about-block__name">{{ .Author }}</span>
-                        <span class="about-block__date">{{ .PostDate }}</span>
+                        <span class="about-block__date about-block__date-padding-right">{{ .PostDate }}</span>
                     </div>
                 </a>
                 {{ end }}
