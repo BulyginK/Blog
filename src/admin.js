@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputContent = form.querySelector('[name="content"]');
 
   let selectFiles = form.querySelectorAll('.select');
-  let inputValue = form.querySelectorAll('.input');
+  let inputsValue = form.querySelectorAll('.input');
   const classRedBorder = 'form-data__input-border-red';
   const classVisibilityMessage = 'show-message-visibility';
   const classContentRedBorder = 'form-data__content-border-red';
@@ -37,14 +37,14 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i < selectFiles.length; i++) {
         selectFiles[i].addEventListener('change', this.previewFile);
       };
-      for (let i = 0; i < inputValue.length; i++) {
-        inputValue[i].addEventListener('input', this.checkValue);
+      for (let i = 0; i < inputsValue.length; i++) {
+        inputsValue[i].addEventListener('input', this.checkValue);
       };
-      for (let i = 0; i < inputValue.length; i++) {
-        inputValue[i].addEventListener('input', this.showPreview);
+      for (let i = 0; i < inputsValue.length; i++) {
+        inputsValue[i].addEventListener('input', this.showPreview);
       };
-      for (let i = 0; i < inputValue.length; i++) {
-        inputValue[i].addEventListener('input', this.addDataForm);
+      for (let i = 0; i < inputsValue.length; i++) {
+        inputsValue[i].addEventListener('input', this.addDataForm);
       };
       for (let i = 0; i < removeImgButtons.length; i++) {
         removeImgButtons[i].addEventListener('click', this.removeImg);
@@ -151,14 +151,14 @@ document.addEventListener("DOMContentLoaded", () => {
       appData.readerOnloadend(imgInput, reader, file);
     },
     removeInputValue: function () {
-      for (let i = 0; i < inputValue.length; i++) {
-        inputValue[i].value = '';
+      for (let i = 0; i < inputsValue.length; i++) {
+        inputsValue[i].value = '';
       };
       inputContent.value = '';
     },
     removeSelectFiles: function () {
-      for (let i = 0; i < inputValue.length; i++) {
-        inputValue[i].value = '';
+      for (let i = 0; i < inputsValue.length; i++) {
+        inputsValue[i].value = '';
       };
     },
     removeImgAuthor: function (e) {
@@ -264,18 +264,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     },
     highlightingRequired: function () {
-      for (let i = 0; i < inputValue.length; i++) {
-        if (inputValue[i].value === "") {
-          let titleNoName = inputValue[i].nextElementSibling;
+      for (let i = 0; i < inputsValue.length; i++) {
+        if (inputsValue[i].value === "") {
+          let titleNoName = inputsValue[i].nextElementSibling;
           titleNoName.setAttribute("style", "display: block");
-          inputValue[i].classList.add(classRedBorder);
+          inputsValue[i].classList.add(classRedBorder);
         }
-      };
+      }
       for (let i = 0; i < selectFiles.length; i++) {
         if (selectFiles[i].value === "") {
           selectFiles[i].parentNode.nextElementSibling.setAttribute("style", "display: block");
         }
-      };
+      }
       if (inputContent.value === "") {
         inputContent.nextElementSibling.setAttribute("style", "display: block");
         inputContent.classList.add(classContentRedBorder);
@@ -301,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
         SmallImage: appData.formData['small-img'],
         SmallImageName: nameSmallImg,
         Content: appData.formData['content'],
-      };
+      }
       console.log(jsonData);
 
       if (!appData.validate(jsonData)) {
@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
         appData.removeAvatar(removeImgAuthorButton);
         for (let i = 0; i < removeImgButtons.length; i++) {
           appData.removeImgs(removeImgButtons[i]);
-        };
+        }
       } else {
         appData.highlightingRequired();
         messageAlert.classList.add(classVisibilityMessage);

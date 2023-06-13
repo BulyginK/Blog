@@ -1,8 +1,9 @@
 'use strict';
 
 document.addEventListener("DOMContentLoaded", () => {
-  const inputValue = document.querySelectorAll('.input');
+  const inputsValue = document.querySelectorAll('.input');
   const inputEmail = document.querySelector('.input__email');
+  const inputPassword = document.querySelector('.input__password');
   const alertIncorrect = document.querySelector('.form__alert-incorrect');
   const alertEmpty = document.querySelector('.form__alert-empty');
   const buttomLogIn = document.querySelector('.form__button');
@@ -25,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
       buttomLogIn.addEventListener('click', this.login, false)
     },
     addListeners: function () {
-      for (let i = 0; i < inputValue.length; i++) {
-        inputValue[i].addEventListener('input', this.checkValue, false);
+      for (let i = 0; i < inputsValue.length; i++) {
+        inputsValue[i].addEventListener('input', this.checkValue, false);
       };
-      for (let i = 0; i < inputValue.length; i++) {
-        inputValue[i].addEventListener('input', this.addDataForm, false);
+      for (let i = 0; i < inputsValue.length; i++) {
+        inputsValue[i].addEventListener('input', this.addDataForm, false);
       };
     },
     addDataForm: function () {
@@ -71,21 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
         appData.hidePassword();
       }
     },
-    validate: function (jsonData) {
-      let errors = 0;
+    validateEmail: function () {
       let pattern = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
+      let errors = 0;
 
-      // /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
-      // /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/
-
-      for (let key in jsonData) {
-        if (!jsonData[key]) {
-          // console.dir(jsonData);
-          alertEmpty.classList.add(classVisibilityMessage);
-          errors++
-        }
-      };
-      if (errors == 0 && !pattern.test(inputEmail.value)) {
+      if (!pattern.test(inputEmail.value)) {
+        alertEmpty.classList.remove(classVisibilityMessage);
         alertIncorrect.classList.add(classVisibilityMessage);
         inputEmail.classList.add(classRedBorder);
         incorrectEmail.setAttribute("style", "display: block");
@@ -101,14 +93,16 @@ document.addEventListener("DOMContentLoaded", () => {
         Password: appData.formData['password'],
       };
 
-      if (!appData.validate(jsonData)) {
-        alert('Все ОК');
+      if (inputEmail.value != "" && inputPassword.value != "") {
+        if (!appData.validateEmail()) {
+          alert("OK!")
+        }
       } else {
-        for (let i = 0; i < inputValue.length; i++) {
-          if (inputValue[i].value === "") {
-            let requiredAlert = inputValue[i].parentNode.nextElementSibling;
-
-            inputValue[i].classList.add(classRedBorder);
+        alertEmpty.classList.add(classVisibilityMessage);
+        for (let i = 0; i < inputsValue.length; i++) {
+          if (inputsValue[i].value === "") {
+            let requiredAlert = inputsValue[i].parentNode.nextElementSibling;
+            inputsValue[i].classList.add(classRedBorder);
             requiredAlert.setAttribute("style", "display: block");
           }
         }
