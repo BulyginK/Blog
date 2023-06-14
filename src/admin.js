@@ -36,19 +36,19 @@ document.addEventListener("DOMContentLoaded", () => {
     addListeners: function () {
       for (let i = 0; i < selectFiles.length; i++) {
         selectFiles[i].addEventListener('change', this.previewFile);
-      };
+      }
       for (let i = 0; i < inputsValue.length; i++) {
         inputsValue[i].addEventListener('input', this.checkValue);
-      };
+      }
       for (let i = 0; i < inputsValue.length; i++) {
         inputsValue[i].addEventListener('input', this.showPreview);
-      };
+      }
       for (let i = 0; i < inputsValue.length; i++) {
         inputsValue[i].addEventListener('input', this.addDataForm);
-      };
+      }
       for (let i = 0; i < removeImgButtons.length; i++) {
         removeImgButtons[i].addEventListener('click', this.removeImg);
-      };
+      }
     },
     checkValue: function () {
       let titleNoName = this.nextElementSibling;
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         titleNoName.setAttribute("style", "display: none");
         this.classList.remove(classRedBorder);
         messageAlert.classList.remove(classVisibilityMessage);
-      };
+      }
     },
     checkContent: function () {
       if (this.value === "") {
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         this.nextElementSibling.setAttribute("style", "display: none");
         this.classList.remove(classContentRedBorder);
         messageAlert.classList.remove(classVisibilityMessage);
-      };
+      }
     },
     addDataForm: function () {
       appData.formData[this.name] = this.value;
@@ -87,13 +87,13 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < inputPreviewElems.length; i++) {
           inputPreviewElems[i].classList.remove(classDarkTitle);
           inputPreviewElems[i].textContent = defaultValue;
-        };
+        }
       } else {
         for (let i = 0; i < inputPreviewElems.length; i++) {
           inputPreviewElems[i].classList.add(classDarkTitle);
           inputPreviewElems[i].textContent = input.value.substr(0, appData.maxLengthValue);
-        };
-      };
+        }
+      }
     },
     readerOnloadend: function (img, reader, file) {
       const imgPreview = form.querySelector('.article-preview__img');
@@ -109,13 +109,13 @@ document.addEventListener("DOMContentLoaded", () => {
           imgAuthorPreview.setAttribute("style", "display: block");
           menuAvatar.setAttribute("style", "display: none");
           imgAvatar.setAttribute("style", "display: block");
-        };
+        }
         if (img.parentNode.classList.contains('big-img')) {
           imgPreview.src = reader.result;
           imgPreview.setAttribute("style", "display: block");
           bigImgPreview.setAttribute("style", "display: none");
           img.parentNode.classList.add(classImgBorder);
-        };
+        }
         if (img.parentNode.classList.contains('small-img')) {
           imgPostPreview.src = reader.result;
           imgPostPreview.setAttribute("style", "display: block");
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         appData.formData[img.name] = img.src;
       },
         false
-      );
+      )
       if (file) {
         reader.readAsDataURL(file);
         img.parentNode.parentNode.nextElementSibling.setAttribute("style", "display: none");;
@@ -147,19 +147,19 @@ document.addEventListener("DOMContentLoaded", () => {
       uploadBlock.setAttribute("style", "display: none");
       if (provisionSizeImg) {
         provisionSizeImg.setAttribute("style", "display: none");
-      };
+      }
       appData.readerOnloadend(imgInput, reader, file);
     },
     removeInputValue: function () {
       for (let i = 0; i < inputsValue.length; i++) {
         inputsValue[i].value = '';
-      };
+      }
       inputContent.value = '';
     },
     removeSelectFiles: function () {
       for (let i = 0; i < inputsValue.length; i++) {
         inputsValue[i].value = '';
-      };
+      }
     },
     removeImgAuthor: function (e) {
       e.preventDefault();
@@ -211,32 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
         imgPreview.src = "";
         imgPreview.setAttribute("style", "display: none");
         bigImgPreview.setAttribute("style", "display: block");
-      };
-      if (this.parentNode.parentNode.classList.contains('small-img')) {
-        imgPostPreview.src = "";
-        imgPostPreview.setAttribute("style", "display: none");
       }
-    },
-    removeImgs: function (img) {
-      const imgInput = img.parentNode.parentNode.querySelector('.img-input');
-      const bigImgPreview = form.querySelector('.article-preview__img-post');
-      const imgPreview = form.querySelector('.article-preview__img');
-      const imgPostPreview = form.querySelector('.img-post__img');
-      const provisionSizeImg = img.parentNode.parentNode.querySelector('.form-data__provision-size');
-      const uploadBlock = img.parentNode.parentNode.querySelector('.form-data__upload-block');
-      const removeBlock = img.parentNode;
-      imgInput.src = "";
-      imgInput.setAttribute("style", "display: none");
-      removeBlock.setAttribute("style", "display: none");
-      uploadBlock.setAttribute("style", "display: flex");
-      provisionSizeImg.setAttribute("style", "display: block");
-      imgInput.parentNode.classList.remove(classImgBorder);
-      if (img.parentNode.parentNode.classList.contains('big-img')) {
-        imgPreview.src = "";
-        imgPreview.setAttribute("style", "display: none");
-        bigImgPreview.setAttribute("style", "display: block");
-      };
-      if (img.parentNode.parentNode.classList.contains('small-img')) {
+      if (this.parentNode.parentNode.classList.contains('small-img')) {
         imgPostPreview.src = "";
         imgPostPreview.setAttribute("style", "display: none");
       }
@@ -257,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       if (res.ok) {
         messagePublish.classList.add(classVisibilityMessage);
-        setTimeout(() => messagePublish.classList.remove(classVisibilityMessage), 3000);
+        setTimeout(() => window.location.href = '/home', 2000);
       } else {
         console.log(res);
         messageAlert.classList.add(classVisibilityMessage);
@@ -306,11 +282,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!appData.validate(jsonData)) {
         appData.sendForm(jsonData);
-        appData.removeInputValue();
-        appData.removeAvatar(removeImgAuthorButton);
-        for (let i = 0; i < removeImgButtons.length; i++) {
-          appData.removeImgs(removeImgButtons[i]);
-        }
       } else {
         appData.highlightingRequired();
         messageAlert.classList.add(classVisibilityMessage);

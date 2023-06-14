@@ -324,6 +324,10 @@
     background: rgba(35, 47, 56, 0.6);
 }
 
+.footer__nav-items {
+    display: none;
+}
+
 @media screen and (max-width: 1023px) {
     .nav-menu {
         /* max-width: 720px; */
@@ -365,7 +369,6 @@
 @media screen and (max-width: 767px) {
     .header {
         padding: 0 20px;
-        
     }
     
     .nav-menu {
@@ -410,6 +413,7 @@
     }
 
     .nav-block {
+        width: 370px;
         flex-direction: row;
         flex-wrap: wrap;
         padding: 22px 0 31px;
@@ -430,7 +434,7 @@
     .cards__big-card {
         /* max-width: 400px; */
         /* max-width: 100%; */
-        max-width: 480px;
+        max-width: 440px;
         width: 100%;
         margin: 0 10px 36px;
         padding: 20px 20px 15px;
@@ -460,5 +464,18 @@
 
     .about-block__date-padding-right {
         right: 20px;
+    }
+
+    .footer__form {
+        padding-right: 18px;
+        padding-left:  22px;
+    }
+
+    .footer__nav-items {
+        display: flex;
+        width: 100px;
+        text-align: center;
+        flex-wrap: wrap;
+        flex-direction: row;
     }
 }
